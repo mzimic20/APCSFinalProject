@@ -12,8 +12,7 @@ class Function {
   void parseExpression(String s) {
     //base case
     if (s.length() <= 1) {
-      if (s.equals("x") || s.equals("y")) tree.add(s);
-      else if (!s.isEmpty()) tree.add(Float.parseFloat(s));
+      tree.add(s);
     }
     
     //split along =, = should be the final operation and at the 0th index in tree
@@ -61,6 +60,10 @@ class Function {
     }
     if (count == 0) return true;
     else return false;
+  }
+  
+  ArrayList<Object> getTree() {
+    return tree;
   }
 
 }

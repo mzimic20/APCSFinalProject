@@ -27,11 +27,11 @@ void keyPressed() {
   for(TextBox b : boxes) {
     if (b.getStatus()) {
       if (key == BACKSPACE) b.remove();
-      else b.add(key);
+      else if (key != SHIFT) b.add(key);
       target = b;
     }
   }
-  target.getF().druck();
+  print(target.getF().getTree());
 }
 
 void mouseClicked() {
