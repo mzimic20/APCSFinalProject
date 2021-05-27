@@ -22,7 +22,7 @@ public class Grid {
     return (y - 900) * (bound[3]-bound[2]) / -900 + bound[2];
   }
   float increment(float range) {
-    return pow(5,(int)(log(range)/log(5))-1);
+    return pow(4,(int)(log(range)/log(4))-1);
   }
   void draw() {
     //axes
@@ -43,7 +43,6 @@ public class Grid {
     }
   }
   void zoom(boolean n, int x, int y) {
-    print(x,y,"\n");
     float scale = 1 + (0.5/abs(log(bound[3]-bound[2] + bound[1]-bound[0])));
     if (n) {
       scale = 1 / scale;
@@ -56,5 +55,13 @@ public class Grid {
       bound[2] = ry - (ry - bound[2]) * scale;
       bound[3] = ry + (bound[3] - ry) * scale;
     }
+  }
+  void move(float x, float y, int mx, int my) {
+    float nmx = rx(mx);
+    float nmy = ry(my);
+    bound[0] -= (nmx-x);
+    bound[1] -= (nmx-x);
+    bound[2] -= (nmy-y);
+    bound[3] -= (nmy-y);
   }
 }
