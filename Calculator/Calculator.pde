@@ -22,3 +22,18 @@ void mouseWheel(MouseEvent event) {
   float e = event.getCount();
   g.zoom(e);
 }
+
+void keyPressed() {
+  for(TextBox b : boxes) {
+    if (b.getStatus()) {
+      if (key == BACKSPACE) b.remove();
+      else b.add(key);
+    }
+  }
+}
+
+void mouseClicked() {
+  for(TextBox b : boxes) {
+    b.changeStatus();
+  }
+}
