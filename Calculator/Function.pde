@@ -30,7 +30,7 @@ class Function {
           tree.add(s.charAt(i));
           parseExpression(s.substring(0, i));
           parseExpression(s.substring(i + 1, s.length()));
-          i = s.length();
+          break;
         }
       }
       //loop again for multiplication and division
@@ -39,7 +39,7 @@ class Function {
           tree.add(s.charAt(i));
           parseExpression(s.substring(0, i));
           parseExpression(s.substring(i + 1, s.length()));
-          i = s.length();
+          break;
         }
         //test for variable multiplication, ex: read 4x as 4 * x
         /*
