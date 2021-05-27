@@ -11,6 +11,7 @@ void setup() {
 }
 
 void draw() {
+  background(240);
   for(TextBox t : boxes) {
     t.draw();
   }
@@ -18,6 +19,5 @@ void draw() {
 }
 
 void mouseWheel(MouseEvent event) {
-  //n.zoom(event.getCount() == -1);
-  
+  n.zoom(event.getCount() == -1, mouseX, mouseY);
 }

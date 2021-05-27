@@ -15,6 +15,12 @@ public class Grid {
   float sy(float y) {
     return 900 - 900 * (y - bound[2]) / (bound[3] - bound[2]);
   }
+  float rx(int x) {
+    return (x - 300) * (bound[1]-bound[0]) / 900 + bound[0];
+  }
+  float ry(int y) {
+    return (y - 900) * (bound[3]-bound[2]) / -900 + bound[2];
+  }
   float increment(float range) {
     float sum = 0;
     for (int i = 6; i <= 10; i++) {
@@ -43,8 +49,17 @@ public class Grid {
     }
   }
   void zoom(boolean n, int x, int y) {
+    float scale = 1.05;
     if (n) {
-    } else {
+      scale = 1 / scale;
+    }
+    float rx = rx(x);
+    float ry = ry(y);
+    if (rx > bound[0] && rx < bound[1] && ry > bound[2] && ry < bound[3]) {
+      bound[0] = rx - (rx - bound[0]) * scale;
+      bound[1] = rx + (bound[1] - rx) * scale;
+      bound[2] = ry - (ry - bound[2]) * scale;
+      bound[3] = ry + (bound[3] - ry) * scale;
     }
   }
 }
