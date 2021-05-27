@@ -3,14 +3,17 @@ class TextBox {
   private String e;
   private int rank;
   private boolean clicked;
+  private Function f;
   
   TextBox(int r) {
     e = "";
     rank = r;
     clicked = false;
+    f = new Function(e);
   }
   
   void draw() {
+    textAlign(LEFT);
     //field
     if (clicked) fill(220, 245, 255);
     else fill(245);
@@ -20,11 +23,11 @@ class TextBox {
     //ordinal number
     textSize(15);
     fill(191);
-    text(rank + 1 + ". ", 15, rank * 90 + 52.5);
+    text(rank + 1 + ". ", 10, rank * 90 + 52.5);
     
     //equation
     fill(63);
-    text(e, 45, rank * 90 + 52.5);
+    text(e, 30, rank * 90 + 52.5);
   }
   
   boolean getStatus() {
@@ -33,10 +36,12 @@ class TextBox {
   
   void add(char c) {
     e += c;
+    this.updateF();
   }
   
   void remove() {
-    if (e.length() > 0) e = e.substring(0, e.length() - 1);
+    if (!e.isEmpty()) e = e.substring(0, e.length() - 1);
+    this.updateF();
   }
   
   void changeStatus() {
@@ -44,6 +49,14 @@ class TextBox {
       clicked = true;
     }
     else clicked = false;
+  }
+  
+  void updateF() {
+    f = new Function(e);
+  }
+  
+  Function getF() {
+    return f;
   }
 
 }

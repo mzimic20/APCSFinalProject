@@ -1,10 +1,9 @@
-Grid g;
+Grid n = new Grid();
 ArrayList<TextBox> boxes;
 
 void setup() {
   size(1200, 900);
   background(240);
-  g = new Grid();
   boxes = new ArrayList<TextBox>();
   for(int i = 0; i < 10; i++) {
     boxes.add(new TextBox(i));
@@ -12,24 +11,27 @@ void setup() {
 }
 
 void draw() {
-  for(TextBox b : boxes) {
-    b.draw();
+  background(240);
+  for(TextBox t : boxes) {
+    t.draw();
   }
-  g.draw();
+  n.draw();
 }
 
 void mouseWheel(MouseEvent event) {
-  float e = event.getCount();
-  g.zoom(e);
+  n.zoom(event.getCount() == -1, mouseX, mouseY);
 }
 
 void keyPressed() {
+  TextBox target = null;
   for(TextBox b : boxes) {
     if (b.getStatus()) {
       if (key == BACKSPACE) b.remove();
       else b.add(key);
+      target = b;
     }
   }
+  target.getF().druck();
 }
 
 void mouseClicked() {
