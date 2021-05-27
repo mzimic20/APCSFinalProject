@@ -24,31 +24,55 @@ public class Grid {
   float increment(float range) {
     return pow(4,(int)(log(range)/log(4))-1);
   }
+  float tx(float x) {
+    if (x < 340) {
+      return 325;
+    }
+    if (x > 1200) {
+      return 900;
+    }
+    return x;
+  }
+  float ty(float y) {
+    if (y < 0) {
+      return 0;
+    }
+    if (y > 875) {
+      return 875;
+    }
+    return y;
+  }
   void draw() {
     //axes
     line(sx(bound[0]),sy(0),sx(bound[1]),sy(0));
-    line(sx(0),sy(bound[2]),sx(0),sy(bound[3]));
+    if (sx(0) > 300) {
+      line(sx(0),sy(bound[2]),sx(0),sy(bound[3]));
+    }
     //grid
     float incx = increment(bound[1]-bound[0]);
-    for (int i = 0; i <= (bound[1]-bound[0])/incx; i++) {
+    for (int i = 0; i <= (bound[1]-bound[0])/incx+1; i++) {
       float x = incx*((int)(bound[0]/incx)+i);
-      line(sx(x),sy(bound[2]),sx(x),sy(bound[3]));
-      textAlign(CENTER,TOP);
-      if ((int) x != x) {
-        text(x, sx(x), sy(0));
-      } else {
-        text((int) x, sx(x), sy(0));
+      if (sx(x) > 300) {
+        line(sx(x),sy(bound[2]),sx(x),sy(bound[3]));
+        textAlign(CENTER,TOP);
+        if ((int) x != x) {
+          text(x, sx(x), ty(sy(0)));
+        } else {
+          text((int) x, sx(x), ty(sy(0)));
+        }
       }
     }
     float incy = increment(bound[3]-bound[2]);
-    for (int i = 0; i <= (bound[3]-bound[2])/incy; i++) {
+    for (int i = 0; i <= (bound[3]-bound[2])/incy+1; i++) {
       float y = incy*((int)(bound[2]/incy)+i);
       line(sx(bound[0]),sy(y),sx(bound[1]),sy(y));
       textAlign(RIGHT,CENTER);
-      if ((int) y != y) {
-        text(y, sx(0), sy(y));
-      } else {
-        text ((int) y, sx(0), sy(y));
+      if (sx(0) != 0) {
+        if ((int) y != y) {
+          text(y, tx(sx(0)), sy(y));
+        } else {
+          text ((int) y, tx(sx(0)), sy(y));
+        }
       }
     }
   }
