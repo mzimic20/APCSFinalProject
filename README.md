@@ -21,4 +21,6 @@ Marko: I began working on the Grid class, adding basic lines and a zooming featu
 on the left where the textboxes will go, where the equations will be entered.
 
 **5/26/2021**\
-Marko:
+Marko: I almost completely finished the TextBox class, which now consists of a typeable field and takes
+parameters. Tomorrow I plan on starting the Function class and tying that into the TextBox class and vice
+versa.
