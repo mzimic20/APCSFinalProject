@@ -31,15 +31,25 @@ public class Grid {
     //grid
     float incx = increment(bound[1]-bound[0]);
     for (int i = 0; i <= (bound[1]-bound[0])/incx; i++) {
-      line(sx(incx*((int)(bound[0]/incx)+i)),sy(bound[2]),sx(incx*((int)(bound[0]/incx)+i)),sy(bound[3]));
+      float x = incx*((int)(bound[0]/incx)+i);
+      line(sx(x),sy(bound[2]),sx(x),sy(bound[3]));
       textAlign(CENTER,TOP);
-      text(incx*((int)(bound[0]/incx)+i),sx(incx*((int)(bound[0]/incx)+i)),sy(0));
+      if ((int) x != x) {
+        text(x, sx(x), sy(0));
+      } else {
+        text((int) x, sx(x), sy(0));
+      }
     }
     float incy = increment(bound[3]-bound[2]);
     for (int i = 0; i <= (bound[3]-bound[2])/incy; i++) {
-      line(sx(bound[0]),sy(incy*((int)(bound[2]/incy)+i)),sx(bound[1]),sy(incy*((int)(bound[2]/incy)+i)));
+      float y = incy*((int)(bound[2]/incy)+i);
+      line(sx(bound[0]),sy(y),sx(bound[1]),sy(y));
       textAlign(RIGHT,CENTER);
-      text(incy*((int)(bound[2]/incy)+i),sx(0),sy(incy*((int)(bound[2]/incy)+i)));
+      if ((int) y != y) {
+        text(y, sx(0), sy(y));
+      } else {
+        text ((int) y, sx(0), sy(y));
+      }
     }
   }
   void zoom(boolean n, int x, int y) {
