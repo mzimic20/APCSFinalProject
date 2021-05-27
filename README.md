@@ -16,11 +16,12 @@ parametric equations and conic sections.
 
 ### Development Log
 **5/25/2021**\
-Christopher Tan: I created and worked on the UML diagram and outlined the basic classes (including functions, and instance variables). I also created a few classes and filled in the basic structure and layout.
+Christopher: I created and worked on the UML diagram and outlined the basic classes (including functions, and instance variables). I also created a few classes and filled in the basic structure and layout.
 Marko: I began working on the Grid class, adding basic lines and a zooming feature as well as an empty region
 on the left where the textboxes will go, where the equations will be entered.
 
 **5/26/2021**\
 Marko: I almost completely finished the TextBox class, which now consists of a typeable field and takes
 parameters. Tomorrow I plan on starting the Function class and tying that into the TextBox class and vice
-versa.
+versa.\
+Christopher: I worked on recreating the grid to allow for zooming and appropriate scaling, however, it is not finished because I have yet to figure out a formula for the size of the intervals. I finished / uploaded the UML diagram as well to the prototype.
