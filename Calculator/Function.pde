@@ -25,14 +25,17 @@ class Function {
     //else, search for operators in reverse PEMDAS
     else {
       //loop once for addition and subtraction
+      int prev = 0;
       for(int i = 0; i < s.length(); i++) {
         if (s.charAt(i) == '+' || s.charAt(i) == '-' && this.pbounds(s, i)) {
           tree.add(s.charAt(i));
-          parseExpression(s.substring(0, i));
+          parseExpression(s.substring(prev, i));
           parseExpression(s.substring(i + 1, s.length()));
+          prev = i;
         }
       }
       //loop again for multiplication and division
+      /*
       for(int i = 0; i < s.length(); i++) {
         if (s.charAt(i) == '*' || s.charAt(i) == '/' && this.pbounds(s, i)) {
           tree.add(s.charAt(i));
@@ -49,6 +52,7 @@ class Function {
           parseExpression(s.substring(i + 1, s.length()));
             }
       }
+      */
     }
   }
   

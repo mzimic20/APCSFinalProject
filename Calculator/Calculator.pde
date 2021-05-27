@@ -27,7 +27,7 @@ void keyPressed() {
   for(TextBox b : boxes) {
     if (b.getStatus()) {
       if (key == BACKSPACE) b.remove();
-      else if (key != SHIFT) b.add(key);
+      else if (key != CODED) b.add(key);
       target = b;
     }
   }
