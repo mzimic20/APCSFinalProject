@@ -26,10 +26,10 @@ public class Grid {
   }
   float tx(float x) {
     if (x < 340) {
-      return 325;
+      return 340;
     }
     if (x > 1200) {
-      return 900;
+      return 1200;
     }
     return x;
   }
