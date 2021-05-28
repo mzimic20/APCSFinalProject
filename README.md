@@ -16,7 +16,7 @@ parametric equations and conic sections.
 
 ### Development Log
 **5/25/2021**\
-Christopher Tan: I created and worked on the UML diagram and outlined the basic classes (including functions, and instance variables). I also created a few classes and filled in the basic structure and layout.
+Christopher: I created and worked on the UML diagram and outlined the basic classes (including functions, and instance variables). I also created a few classes and filled in the basic structure and layout.
 Marko: I began working on the Grid class, adding basic lines and a zooming feature as well as an empty region
 on the left where the textboxes will go, where the equations will be entered.
 
