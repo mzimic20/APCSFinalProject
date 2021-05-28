@@ -24,3 +24,9 @@ on the left where the textboxes will go, where the equations will be entered.
 Marko: I almost completely finished the TextBox class, which now consists of a typeable field and takes
 parameters. Tomorrow I plan on starting the Function class and tying that into the TextBox class and vice
 versa.
+
+**5/27/2021**\
+Marko: I did a good portion of the Function class and implemented it
+into TextBox like I said I would. Function still needs work regarding
+creating the expression tree, but I can certainly piece that together
+by Saturday or Sunday.
