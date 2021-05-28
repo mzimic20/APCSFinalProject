@@ -24,34 +24,28 @@ class Function {
     
     //else, search for operators in reverse PEMDAS
     else {
+      boolean next = true;
       //loop once for addition and subtraction
       for(int i = 0; i < s.length(); i++) {
         if (s.charAt(i) == '+' || s.charAt(i) == '-' && this.pbounds(s, i)) {
           tree.add(s.charAt(i));
           parseExpression(s.substring(0, i));
           parseExpression(s.substring(i + 1, s.length()));
+          next = false;
           break;
         }
       }
       //loop again for multiplication and division
-      for(int i = 0; i < s.length(); i++) {
-        if (s.charAt(i) == '*' || s.charAt(i) == '/' && this.pbounds(s, i)) {
-          tree.add(s.charAt(i));
-          parseExpression(s.substring(0, i));
-          parseExpression(s.substring(i + 1, s.length()));
-          break;
+      if (next) {
+        for(int i = 0; i < s.length(); i++) {
+          if (s.charAt(i) == '*' || s.charAt(i) == '/' && this.pbounds(s, i)) {
+            tree.add(s.charAt(i));
+            parseExpression(s.substring(0, i));
+            parseExpression(s.substring(i + 1, s.length()));
+            next = false;
+            break;
+          } 
         }
-        //test for variable multiplication, ex: read 4x as 4 * x
-        /*
-        if ((i != 0 && i < s.length() - 1) &&
-            (s.charAt(i + 1) == 'x' || s.charAt(i - 1) == 'x' || s.charAt(i + 1) == 'y' || s.charAt(i - 1) == 'y') &&
-            (s.charAt(i) != '+' || s.charAt(i) != '-' || s.charAt(i) != '*' || s.charAt(i) != '/' || s.charAt(i) != '^') && 
-            this.pbounds(s, i)) {
-          tree.add('*');
-          parseExpression(s.substring(0, i));
-          parseExpression(s.substring(i + 1, s.length()));
-            }
-         */
       }
     }
   }
