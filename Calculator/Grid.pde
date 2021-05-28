@@ -22,28 +22,61 @@ public class Grid {
     return (y - 900) * (bound[3]-bound[2]) / -900 + bound[2];
   }
   float increment(float range) {
-    return pow(5,(int)(log(range)/log(5))-1);
+    return pow(4,(int)(log(range)/log(4))-1);
+  }
+  float tx(float x) {
+    if (x < 340) {
+      return 340;
+    }
+    if (x > 1200) {
+      return 1200;
+    }
+    return x;
+  }
+  float ty(float y) {
+    if (y < 0) {
+      return 0;
+    }
+    if (y > 875) {
+      return 875;
+    }
+    return y;
   }
   void draw() {
     //axes
     line(sx(bound[0]),sy(0),sx(bound[1]),sy(0));
-    line(sx(0),sy(bound[2]),sx(0),sy(bound[3]));
+    if (sx(0) > 300) {
+      line(sx(0),sy(bound[2]),sx(0),sy(bound[3]));
+    }
     //grid
     float incx = increment(bound[1]-bound[0]);
-    for (int i = 0; i <= (bound[1]-bound[0])/incx; i++) {
-      line(sx(incx*((int)(bound[0]/incx)+i)),sy(bound[2]),sx(incx*((int)(bound[0]/incx)+i)),sy(bound[3]));
-      textAlign(CENTER,TOP);
-      text(incx*((int)(bound[0]/incx)+i),sx(incx*((int)(bound[0]/incx)+i)),sy(0));
+    for (int i = 0; i <= (bound[1]-bound[0])/incx+1; i++) {
+      float x = incx*((int)(bound[0]/incx)+i);
+      if (sx(x) > 300) {
+        line(sx(x),sy(bound[2]),sx(x),sy(bound[3]));
+        textAlign(CENTER,TOP);
+        if ((int) x != x) {
+          text(x, sx(x), ty(sy(0)));
+        } else {
+          text((int) x, sx(x), ty(sy(0)));
+        }
+      }
     }
     float incy = increment(bound[3]-bound[2]);
-    for (int i = 0; i <= (bound[3]-bound[2])/incy; i++) {
-      line(sx(bound[0]),sy(incy*((int)(bound[2]/incy)+i)),sx(bound[1]),sy(incy*((int)(bound[2]/incy)+i)));
+    for (int i = 0; i <= (bound[3]-bound[2])/incy+1; i++) {
+      float y = incy*((int)(bound[2]/incy)+i);
+      line(sx(bound[0]),sy(y),sx(bound[1]),sy(y));
       textAlign(RIGHT,CENTER);
-      text(incy*((int)(bound[2]/incy)+i),sx(0),sy(incy*((int)(bound[2]/incy)+i)));
+      if (sx(0) != 0) {
+        if ((int) y != y) {
+          text(y, tx(sx(0)), sy(y));
+        } else {
+          text ((int) y, tx(sx(0)), sy(y));
+        }
+      }
     }
   }
   void zoom(boolean n, int x, int y) {
-    print(x,y,"\n");
     float scale = 1 + (0.5/abs(log(bound[3]-bound[2] + bound[1]-bound[0])));
     if (n) {
       scale = 1 / scale;
@@ -56,5 +89,13 @@ public class Grid {
       bound[2] = ry - (ry - bound[2]) * scale;
       bound[3] = ry + (bound[3] - ry) * scale;
     }
+  }
+  void move(float x, float y, int mx, int my) {
+    float nmx = rx(mx);
+    float nmy = ry(my);
+    bound[0] -= (nmx-x);
+    bound[1] -= (nmx-x);
+    bound[2] -= (nmy-y);
+    bound[3] -= (nmy-y);
   }
 }
