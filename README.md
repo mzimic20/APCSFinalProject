@@ -18,5 +18,5 @@ Marko: I almost completely finished the TextBox class, which now consists of a t
 Christopher: I worked on recreating the grid to allow for zooming and appropriate scaling, however, it is not finished because I have yet to figure out a formula for the size of the intervals. I finished / uploaded the UML diagram as well to the prototype.
 
 **5/27/2021**\
-Marko: I did a good portion of the Function class and implemented it into TextBox like I said I would. Function still needs work regarding creating the expression tree, but I can certainly piece that together by Saturday or Sunday.
+Marko: I did a good portion of the Function class and implemented it into TextBox like I said I would. Function still needs work regarding creating the expression tree, but I can certainly piece that together by Saturday or Sunday.\
 Christopher: I implemented a dragging feature that moves the grid with the mouse. I also worked a bit on the axes to make sure the coordinates are always visible by "sticking" them to the edge.
