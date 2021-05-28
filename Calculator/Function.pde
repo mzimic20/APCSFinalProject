@@ -9,6 +9,7 @@ class Function {
     parseExpression(e);
   }
   
+  //creates an expression tree based on the string equation
   void parseExpression(String s) {
     //base case
     if (s.length() <= 1) {
@@ -16,7 +17,7 @@ class Function {
     }
     
     //split along =, = should be the final operation and at the 0th index in tree
-    if (s.contains("=")) {
+    else if (s.contains("=")) {
       tree.add('=');
       parseExpression(s.substring(0, s.indexOf("=")));
       parseExpression(s.substring(s.indexOf("=") + 1, s.length()));
@@ -44,12 +45,25 @@ class Function {
             parseExpression(s.substring(i + 1, s.length()));
             next = false;
             break;
-          } 
+          }
+        }
+      }
+      //loop again for exponentiation
+      if (next) {
+        for(int i = 0; i < s.length(); i++) {
+          if (s.charAt(i) == '^' && this.pbounds(s, i)) {
+            tree.add('^');
+            parseExpression(s.substring(0, i));
+            parseExpression(s.substring(i + 1, s.length()));
+            next = false;
+            break;
+          }
         }
       }
     }
   }
   
+  //tests whether or not the specified index is in a parenthetical expression
   boolean pbounds(String s, int index) {
     int count = 0;
     for(int i = 0; i <= index; i++) {
