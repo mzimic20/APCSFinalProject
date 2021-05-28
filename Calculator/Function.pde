@@ -12,7 +12,7 @@ class Function {
   //creates an expression tree based on the string equation
   void parseExpression(String s) {
     //base case
-    if (s.length() <= 1) {
+    if (this.isNumber(s) || s.length() <= 1) {
       tree.add(s);
     }
     
@@ -43,6 +43,17 @@ class Function {
             tree.add(s.charAt(i));
             parseExpression(s.substring(0, i));
             parseExpression(s.substring(i + 1, s.length()));
+            next = false;
+            break;
+          }
+          //test for notation like 3x and 3(x+1) and count it as multiplication
+          else if (i > 0 && (s.charAt(i) == 'x' || s.charAt(i) == 'y' || s.charAt(i) == '(') && this.pbounds(s, i) &&
+                   (s.charAt(i - 1) != '+' || s.charAt(i - 1) != '-' || 
+                   s.charAt(i - 1) != '*' || s.charAt(i - 1) != '/' || 
+                   s.charAt(i - 1) != '^')) {
+            tree.add('*');
+            parseExpression(s.substring(0, i));
+            parseExpression(s.substring(i, s.length()));
             next = false;
             break;
           }
@@ -78,6 +89,15 @@ class Function {
     }
     if (count == 0) return true;
     else return false;
+  }
+  
+  //tests whether or not the input string is a number or not
+  boolean isNumber(String s) {
+    char[] c = s.toCharArray();
+    for(char i : c) {
+      if (!Character.isDigit(i) || i != '.') return false;
+    }
+    return true;
   }
   
   ArrayList<Object> getTree() {
