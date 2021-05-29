@@ -36,3 +36,21 @@ void mouseDragged(MouseEvent event) {
     n.move(center[0],center[1],mouseX,mouseY);
   }
 }
+
+void keyPressed() {
+  TextBox target = null;
+  for(TextBox b : boxes) {
+    if (b.getStatus()) {
+      if (key == BACKSPACE) b.remove();
+      else if (key != CODED) b.add(key);
+      target = b;
+    }
+  }
+  print(target.getF().getTree());
+}
+
+void mouseClicked() {
+  for(TextBox b : boxes) {
+    b.changeStatus();
+  }
+}

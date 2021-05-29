@@ -24,9 +24,9 @@ public class Grid {
   float increment(float range) {
     return pow(4,(int)(log(range)/log(4))-1);
   }
-  float tx(float x) {
-    if (x < 340) {
-      return 340;
+  float tx(float x, String y) {
+    if (x < 300 + 10 * y.length()) {
+      return 300 + 10 * y.length();
     }
     if (x > 1200) {
       return 1200;
@@ -69,9 +69,9 @@ public class Grid {
       textAlign(RIGHT,CENTER);
       if (sx(0) != 0) {
         if ((int) y != y) {
-          text(y, tx(sx(0)), sy(y));
+          text(y, tx(sx(0), ""+floor(1000*y)/1000.0), sy(y));
         } else {
-          text ((int) y, tx(sx(0)), sy(y));
+          text ((int)y, tx(sx(0), ""+(int)y), sy(y));
         }
       }
     }

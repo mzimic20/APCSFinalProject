@@ -3,7 +3,7 @@ class Expression {
   public Expression(String ex) {
     this.ex = ex;
   }
-  void display() {
+  void draw() {
   }
   int evaluate() {
     return 0;
