@@ -11,6 +11,15 @@ class Function {
   
   //creates an expression tree based on the string equation
   void parseExpression(String s) {
+    //strip parentheses if they encase the whole expression
+    if (s.length() > 1 && s.charAt(0) == '(') {
+      boolean strip = true;
+      for(int i = 0; i < s.length() - 1; i++) {
+        if (this.pbounds(s, i)) strip = false;
+      }
+      if (strip) s = s.substring(1, s.length() - 1);
+    }
+    
     //base case
     if (this.isNumber(s) || s.length() <= 1) {
       tree.add(s);
@@ -71,7 +80,6 @@ class Function {
           }
         }
       }
-      //LOOP FOR PARENTHESES GOES HERE
     }
   }
   
@@ -95,7 +103,9 @@ class Function {
   boolean isNumber(String s) {
     char[] c = s.toCharArray();
     for(char i : c) {
-      if (!Character.isDigit(i) || i != '.') return false;
+      if (i != '.') {
+        if (!Character.isDigit(i)) return false;
+      }
     }
     return true;
   }
