@@ -8,22 +8,25 @@ public class Grid {
     bound[2] = -10; //ymin
     bound[3] = 10; //ymax
   }
-  
+  //converts coordinates to pixels
   float sx(float x) {
     return 300 + 900 * (x - bound[0]) / (bound[1] - bound[0]);
   }
   float sy(float y) {
     return 900 - 900 * (y - bound[2]) / (bound[3] - bound[2]);
   }
+  //converts pixels to coordinates
   float rx(int x) {
     return (x - 300) * (bound[1]-bound[0]) / 900 + bound[0];
   }
   float ry(int y) {
     return (y - 900) * (bound[3]-bound[2]) / -900 + bound[2];
   }
+  //determines spacing of grid lines
   float increment(float range) {
     return pow(4,(int)(log(range)/log(4))-1);
   }
+  //makes sure numbers on axes are on screen
   float tx(float x, String y) {
     if (x < 300 + 10 * y.length()) {
       return 300 + 10 * y.length();
@@ -97,5 +100,8 @@ public class Grid {
     bound[1] -= (nmx-x);
     bound[2] -= (nmy-y);
     bound[3] -= (nmy-y);
+  }
+  void connect(float x1, float y1, float x2, float y2) {
+    line(sx(x1),sy(y1),sx(x2),sy(y2));
   }
 }
