@@ -29,4 +29,5 @@ division, and exponentiation.
 Marko: Mother Zimic decided to make today a cleaning today so I couldn't do any work until 2am technically on the 30th, but parseExpression() can now handle decimals and multidigit numbers. Started work on parentheses.
 
 **5/30/2021**\
-Marko: parseExpression now correctly parses parentheses and makes appropriate trees, added a new if statement to correctly identify distribution multiplication that looks like 4(x-1).
+Marko: parseExpression now correctly parses parentheses and makes appropriate trees, added a new if statement to correctly identify distribution multiplication that looks like 4(x-1).\
+Christopher: Helped a little bit in parseExpression, debugging some of my previous code and leaving comments. I completed the visual part of displaying the functions based on Marko's tree.
