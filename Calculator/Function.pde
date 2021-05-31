@@ -37,7 +37,7 @@ class Function {
       boolean next = true;
       //loop once for addition and subtraction
       for(int i = 0; i < s.length(); i++) {
-        if (s.charAt(i) == '+' || s.charAt(i) == '-' && this.pbounds(s, i)) {
+        if ((s.charAt(i) == '+' || s.charAt(i) == '-') && this.pbounds(s, i)) {
           tree.add(s.charAt(i));
           parseExpression(s.substring(0, i));
           parseExpression(s.substring(i + 1, s.length()));
@@ -55,8 +55,19 @@ class Function {
             next = false;
             break;
           }
-          //test for notation like 3x and 3(x+1) and count it as multiplication
-          else if (i > 0 && (s.charAt(i) == 'x' || s.charAt(i) == 'y' || s.charAt(i) == '(') && this.pbounds(s, i) &&
+          //test for notation like 3x and count it as multiplication
+          else if (i > 0 && (s.charAt(i) == 'x' || s.charAt(i) == 'y') && this.pbounds(s, i) &&
+                   (s.charAt(i - 1) != '+' || s.charAt(i - 1) != '-' || 
+                   s.charAt(i - 1) != '*' || s.charAt(i - 1) != '/' || 
+                   s.charAt(i - 1) != '^')) {
+            tree.add('*');
+            parseExpression(s.substring(0, i));
+            parseExpression(s.substring(i, s.length()));
+            next = false;
+            break;
+          }
+          //test for notation 3(x+1) and count as multiplication
+          else if (i > 0 && (s.charAt(i) == '(') &&
                    (s.charAt(i - 1) != '+' || s.charAt(i - 1) != '-' || 
                    s.charAt(i - 1) != '*' || s.charAt(i - 1) != '/' || 
                    s.charAt(i - 1) != '^')) {
@@ -82,9 +93,9 @@ class Function {
       }
     }
   }
-  
+    
   //evaluates the expression for the given x and y values 
-  boolean evaluate(float x, float y, int index) {
+  boolean evaluate(int index, float x, float y) {
     return false;
   }
   
