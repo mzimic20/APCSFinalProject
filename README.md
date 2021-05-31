@@ -20,3 +20,13 @@ Christopher: I worked on recreating the grid to allow for zooming and appropriat
 **5/27/2021**\
 Marko: I did a good portion of the Function class and implemented it into TextBox like I said I would. Function still needs work regarding creating the expression tree, but I can certainly piece that together by Saturday or Sunday.\
 Christopher: I implemented a dragging feature that moves the grid with the mouse. I also worked a bit on the axes to make sure the coordinates are always visible by "sticking" them to the edge.
+
+**5/28/2021**\
+Marko: TextBox turns red when there is parenthetical imbalance. parseExpression() works with multiplication,
+division, and exponentiation.
+
+**5/29/2021**\
+Marko: Mother Zimic decided to make today a cleaning today so I couldn't do any work until 2am technically on the 30th, but parseExpression() can now handle decimals and multidigit numbers. Started work on parentheses.
+
+**5/30/2021**\
+Marko: parseExpression now correctly parses parentheses and makes appropriate trees, added a new if statement to correctly identify distribution multiplication that looks like 4(x-1).
