@@ -127,8 +127,12 @@ class Function {
     return tree;
   }
   void draw(Grid n) {
-    for (int i = 0; i < 900; i++) {
-      n.rx(i);
+    for (int i = 300; i < 300 + 899; i++) {
+      float x1 = n.rx(i);
+      float y1 = evaluate(x1);
+      float x2 = n.rx(i+1);
+      float y2 = evaluate(x2);
+      n.connect(x1, y1, x2, y2);
     }
   }
   float evaluate(float x) {
@@ -140,7 +144,7 @@ class Function {
     }
     if (r.length > 2) {
       ArrayDeque<Float> stack = new ArrayDeque<Float>();
-      for (int i = r.length-1; i > 2; i++) {
+      for (int i = r.length-1; i >= 2; i--) {
         if (isFloat(r[i])) {
           stack.addLast(Float.parseFloat(r[i]));
         } else {
@@ -148,31 +152,34 @@ class Function {
           try {
             m = stack.removeLast();
             n = stack.removeLast();
+            if (r[i].equals("+")) {
+              stack.addLast(m + n);
+            } else if (r[i].equals("-")) {
+              stack.addLast(m - n);
+            } else if (r[i].equals("*")) {
+              stack.addLast(m * n);
+            } else if (r[i].equals("/")) {
+              stack.addLast(m / n);
+            } else if (r[i].equals("%")) {
+              stack.addLast(m % n);
+            } else if (r[i].equals("^")) {
+              stack.addLast(pow(m,n));
+            }
+            else {
+              //throw new IllegalArgumentException("incorrectly formatted string: operation");
+            }
           } 
           catch (NoSuchElementException e) {
-            throw new IllegalArgumentException("not enough operands");
-          }
-          if (r[i].equals("+")) {
-            stack.addLast(m + n);
-          } else if (r[i].equals("-")) {
-            stack.addLast(m - n);
-          } else if (r[i].equals("*")) {
-            stack.addLast(m * n);
-          } else if (r[i].equals("/")) {
-            stack.addLast(m / n);
-          } else if (r[i].equals("%")) {
-            stack.addLast(m % n);
-          } else {
-            throw new IllegalArgumentException("incorrectly formatted string: operation");
+            //throw new IllegalArgumentException("not enough operands");
           }
         }
       }
-      if (stack.size() == 1){
+      if (stack.size() == 1) {
         return stack.removeLast();
       } else if (stack.size() == 0) {
-        throw new IllegalArgumentException("incorrectly formatted string: empty");
+        //throw new IllegalArgumentException("incorrectly formatted string: empty");
       } else {
-        throw new IllegalArgumentException("too many operands");
+        //throw new IllegalArgumentException("too many operands");
       }
     }
     return 0;

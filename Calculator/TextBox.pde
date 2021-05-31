@@ -30,6 +30,9 @@ class TextBox {
     //equation
     fill(63);
     text(e, 30, rank * 90 + 52.5);
+    
+    //graph
+    f.draw(n);
   }
   
   boolean getStatus() {
