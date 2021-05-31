@@ -9,14 +9,24 @@ class Function {
     parseExpression(e);
   }
   
+  //creates an expression tree based on the string equation
   void parseExpression(String s) {
+    //strip parentheses if they encase the whole expression
+    if (s.length() > 1 && s.charAt(0) == '(') {
+      boolean strip = true;
+      for(int i = 0; i < s.length() - 1; i++) {
+        if (this.pbounds(s, i)) strip = false;
+      }
+      if (strip) s = s.substring(1, s.length() - 1);
+    }
+    
     //base case
-    if (s.length() <= 1) {
+    if (this.isNumber(s) || s.length() <= 1) {
       tree.add(s);
     }
     
     //split along =, = should be the final operation and at the 0th index in tree
-    if (s.contains("=")) {
+    else if (s.contains("=")) {
       tree.add('=');
       parseExpression(s.substring(0, s.indexOf("=")));
       parseExpression(s.substring(s.indexOf("=") + 1, s.length()));
@@ -24,38 +34,72 @@ class Function {
     
     //else, search for operators in reverse PEMDAS
     else {
+      boolean next = true;
       //loop once for addition and subtraction
       for(int i = 0; i < s.length(); i++) {
-        if (s.charAt(i) == '+' || s.charAt(i) == '-' && this.pbounds(s, i)) {
+        if ((s.charAt(i) == '+' || s.charAt(i) == '-') && this.pbounds(s, i)) {
           tree.add(s.charAt(i));
           parseExpression(s.substring(0, i));
           parseExpression(s.substring(i + 1, s.length()));
+          next = false;
           break;
         }
       }
       //loop again for multiplication and division
-      for(int i = 0; i < s.length(); i++) {
-        if (s.charAt(i) == '*' || s.charAt(i) == '/' && this.pbounds(s, i)) {
-          tree.add(s.charAt(i));
-          parseExpression(s.substring(0, i));
-          parseExpression(s.substring(i + 1, s.length()));
-          break;
+      if (next) {
+        for(int i = 0; i < s.length(); i++) {
+          if (s.charAt(i) == '*' || s.charAt(i) == '/' && this.pbounds(s, i)) {
+            tree.add(s.charAt(i));
+            parseExpression(s.substring(0, i));
+            parseExpression(s.substring(i + 1, s.length()));
+            next = false;
+            break;
+          }
+          //test for notation like 3x and count it as multiplication
+          else if (i > 0 && (s.charAt(i) == 'x' || s.charAt(i) == 'y') && this.pbounds(s, i) &&
+                   (s.charAt(i - 1) != '+' || s.charAt(i - 1) != '-' || 
+                   s.charAt(i - 1) != '*' || s.charAt(i - 1) != '/' || 
+                   s.charAt(i - 1) != '^')) {
+            tree.add('*');
+            parseExpression(s.substring(0, i));
+            parseExpression(s.substring(i, s.length()));
+            next = false;
+            break;
+          }
+          //test for notation 3(x+1) and count as multiplication
+          else if (i > 0 && (s.charAt(i) == '(') &&
+                   (s.charAt(i - 1) != '+' || s.charAt(i - 1) != '-' || 
+                   s.charAt(i - 1) != '*' || s.charAt(i - 1) != '/' || 
+                   s.charAt(i - 1) != '^')) {
+            tree.add('*');
+            parseExpression(s.substring(0, i));
+            parseExpression(s.substring(i, s.length()));
+            next = false;
+            break;
+          }
         }
-        //test for variable multiplication, ex: read 4x as 4 * x
-        /*
-        if ((i != 0 && i < s.length() - 1) &&
-            (s.charAt(i + 1) == 'x' || s.charAt(i - 1) == 'x' || s.charAt(i + 1) == 'y' || s.charAt(i - 1) == 'y') &&
-            (s.charAt(i) != '+' || s.charAt(i) != '-' || s.charAt(i) != '*' || s.charAt(i) != '/' || s.charAt(i) != '^') && 
-            this.pbounds(s, i)) {
-          tree.add('*');
-          parseExpression(s.substring(0, i));
-          parseExpression(s.substring(i + 1, s.length()));
-            }
-         */
+      }
+      //loop again for exponentiation
+      if (next) {
+        for(int i = 0; i < s.length(); i++) {
+          if (s.charAt(i) == '^' && this.pbounds(s, i)) {
+            tree.add('^');
+            parseExpression(s.substring(0, i));
+            parseExpression(s.substring(i + 1, s.length()));
+            next = false;
+            break;
+          }
+        }
       }
     }
   }
+    
+  //evaluates the expression for the given x and y values 
+  boolean evaluate(int index, float x, float y) {
+    return false;
+  }
   
+  //tests whether or not the specified index is in a parenthetical expression
   boolean pbounds(String s, int index) {
     int count = 0;
     for(int i = 0; i <= index; i++) {
@@ -64,6 +108,17 @@ class Function {
     }
     if (count == 0) return true;
     else return false;
+  }
+  
+  //tests whether or not the input string is a number or not
+  boolean isNumber(String s) {
+    char[] c = s.toCharArray();
+    for(char i : c) {
+      if (i != '.') {
+        if (!Character.isDigit(i)) return false;
+      }
+    }
+    return true;
   }
   
   ArrayList<Object> getTree() {
