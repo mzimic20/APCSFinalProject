@@ -23,6 +23,20 @@ void mouseWheel(MouseEvent event) {
   n.zoom(event.getCount() == -1, mouseX, mouseY);
 }
 
+void mousePressed(MouseEvent event) {
+  center = new float[] {n.rx(mouseX),n.ry(mouseY)};
+}
+
+void mouseReleased(MouseEvent event) {
+  center = null;
+}
+
+void mouseDragged(MouseEvent event) {
+  if (center != null && mouseX > 300) {
+    n.move(center[0],center[1],mouseX,mouseY);
+  }
+}
+
 void keyPressed() {
   TextBox target = null;
   for(TextBox b : boxes) {
@@ -38,19 +52,5 @@ void keyPressed() {
 void mouseClicked() {
   for(TextBox b : boxes) {
     b.changeStatus();
-  }
-}
-
-void mousePressed(MouseEvent event) {
-  center = new float[] {n.rx(mouseX),n.ry(mouseY)};
-}
-
-void mouseReleased(MouseEvent event) {
-  center = null;
-}
-
-void mouseDragged(MouseEvent event) {
-  if (center != null && mouseX > 300) {
-    n.move(center[0],center[1],mouseX,mouseY);
   }
 }
