@@ -29,7 +29,7 @@ class TextBox {
     
     //equation
     fill(63);
-    text(e, 30, rank * 90 + 52.5);
+    text(e, 30 + 10 * (int) (log(rank+1) / log(10)), rank * 90 + 52.5);
     
     //graph
     f.draw(n);
