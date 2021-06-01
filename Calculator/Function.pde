@@ -38,7 +38,7 @@ class Function {
     else {
       boolean next = true;
       //loop once for addition and subtraction
-      for (int i = 0; i < s.length(); i++) {
+      for (int i = s.length() - 1; i >= 0; i--) {
         if ((s.charAt(i) == '+' || s.charAt(i) == '-') && this.pbounds(s, i)) {
           tree.add("" + s.charAt(i));
           parseExpression(s.substring(0, i));
@@ -49,7 +49,7 @@ class Function {
       }
       //loop again for multiplication and division
       if (next) {
-        for (int i = 0; i < s.length(); i++) {
+        for (int i = s.length() - 1; i >= 0; i--) {
           if (s.charAt(i) == '*' || s.charAt(i) == '/' && this.pbounds(s, i)) {
             tree.add("" + s.charAt(i));
             parseExpression(s.substring(0, i));
@@ -83,7 +83,7 @@ class Function {
       }
       //loop again for exponentiation
       if (next) {
-        for (int i = 0; i < s.length(); i++) {
+        for (int i = s.length() - 1; i >= 0; i--) {
           if (s.charAt(i) == '^' && this.pbounds(s, i)) {
             tree.add("^");
             parseExpression(s.substring(0, i));
