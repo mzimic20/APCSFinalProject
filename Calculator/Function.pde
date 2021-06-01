@@ -127,12 +127,14 @@ class Function {
     return tree;
   }
   void draw(Grid n) {
-    for (int i = 300; i < 300 + 899; i++) {
-      float x1 = n.rx(i);
-      float y1 = evaluate(x1);
+    float x1 = n.rx(300);
+    float y1 = evaluate(x1);
+    for (int i = 301; i < 300 + 899; i++) {
       float x2 = n.rx(i+1);
       float y2 = evaluate(x2);
       n.connect(x1, y1, x2, y2);
+      x1 = x2;
+      y1 = y2;
     }
   }
   float evaluate(float x) {
