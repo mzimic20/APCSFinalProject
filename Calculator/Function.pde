@@ -38,7 +38,7 @@ class Function {
     else {
       boolean next = true;
       //loop once for addition and subtraction
-      for (int i = 0; i < s.length(); i++) {
+      for (int i = s.length() - 1; i >= 0; i--) {
         if ((s.charAt(i) == '+' || s.charAt(i) == '-') && this.pbounds(s, i)) {
           tree.add("" + s.charAt(i));
           parseExpression(s.substring(0, i));
@@ -49,7 +49,7 @@ class Function {
       }
       //loop again for multiplication and division
       if (next) {
-        for (int i = 0; i < s.length(); i++) {
+        for (int i = s.length() - 1; i >= 0; i--) {
           if (s.charAt(i) == '*' || s.charAt(i) == '/' && this.pbounds(s, i)) {
             tree.add("" + s.charAt(i));
             parseExpression(s.substring(0, i));
@@ -83,7 +83,7 @@ class Function {
       }
       //loop again for exponentiation
       if (next) {
-        for (int i = 0; i < s.length(); i++) {
+        for (int i = s.length() - 1; i >= 0; i--) {
           if (s.charAt(i) == '^' && this.pbounds(s, i)) {
             tree.add("^");
             parseExpression(s.substring(0, i));
@@ -126,27 +126,57 @@ class Function {
   ArrayList<String> getTree() {
     return tree;
   }
+ 
+
   void draw(Grid n) {
-    float x1 = n.rx(300);
-    float y1 = evaluate(x1);
-    for (int i = 301; i < 300 + 899; i++) {
-      float x2 = n.rx(i+1);
-      float y2 = evaluate(x2);
-      n.connect(x1, y1, x2, y2);
-      x1 = x2;
-      y1 = y2;
+    if (tree.get(0).equals("=") && tree.get(1).equals("y") && tree.lastIndexOf("y") < 2) {
+      float x1 = n.rx(300);
+      float y1 = evaluate(x1,2);
+      for (int i = 301; i < 300 + 899; i++) {
+        float x2 = n.rx(i+1);
+        float y2 = evaluate(x2,2);
+        n.connect(x1, y1, x2, y2);
+        x1 = x2;
+        y1 = y2;
+      }
+      return;
+    }
+    if (tree.get(0).equals("=") && tree.get(1).equals("x") && tree.lastIndexOf("x") < 2) {
+      float y1 = n.ry(900);
+      float x1 = evaluate(y1,2);
+      for (int i = 900; i >= 0; i--) {
+        float y2 = n.ry(i-1);
+        float x2 = evaluate(y2,2);
+        n.connect(x1,y1,x2,y2);
+        x1 = x2;
+        y1 = y2;
+      }
+      return;
+    }
+    if (!tree.contains("=") && (!tree.contains("y") && tree.contains("x"))) {
+      float x1 = n.rx(300);
+      float y1 = evaluate(x1,0);
+      for (int i = 301; i < 300 + 899; i++) {
+        float x2 = n.rx(i+1);
+        float y2 = evaluate(x2,0);
+        n.connect(x1, y1, x2, y2);
+        x1 = x2;
+        y1 = y2;
+      }
+      return;
     }
   }
-  float evaluate(float x) {
+  float evaluate(float v, int index) {
+    print(v,index);
     String[] r = tree.toArray(new String[0]);
     for (int i = 0; i < r.length; i++) {
-      if (r[i].equals("x")) {
-        r[i] = "" + x;
+      if (r[i].equals("x") || r[i].equals("y")) {
+        r[i] = "" + v;
       }
     }
-    if (r.length > 2) {
+    if (r.length > index) {
       ArrayDeque<Float> stack = new ArrayDeque<Float>();
-      for (int i = r.length-1; i >= 2; i--) {
+      for (int i = r.length-1; i >= index; i--) {
         if (isFloat(r[i])) {
           stack.addLast(Float.parseFloat(r[i]));
         } else {
