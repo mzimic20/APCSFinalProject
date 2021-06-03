@@ -31,3 +31,9 @@ Marko: Mother Zimic decided to make today a cleaning today so I couldn't do any 
 **5/30/2021**\
 Marko: parseExpression now correctly parses parentheses and makes appropriate trees, added a new if statement to correctly identify distribution multiplication that looks like 4(x-1).\
 Christopher: Helped a little bit in parseExpression, debugging some of my previous code and leaving comments. I completed the visual part of displaying the functions based on Marko's tree.
+
+**6/1/2021**\
+Christopher: I made a few slight changes to the design from line size to text readjustment.
+
+**6/2/2021**\
+Christopher: I allowed equations of the form x=f(y) to be evaluated and graphed. I also assumed a f(x) default case when there is no equation or equal sign.
