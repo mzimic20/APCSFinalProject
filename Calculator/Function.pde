@@ -141,7 +141,7 @@ class Function {
       }
       return;
     }
-    if (tree.get(0).equals("=") && tree.get(1).equals("x") && tree.lastIndexOf("x") < 2) {
+    if (tree.size() >= 2 && tree.get(0).equals("=") && tree.get(1).equals("x") && tree.lastIndexOf("x") < 2) {
       float y1 = n.ry(900);
       float x1 = evaluate(y1,2);
       for (int i = 900; i >= 0; i--) {
