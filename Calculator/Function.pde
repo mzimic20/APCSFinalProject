@@ -9,6 +9,9 @@ class Function {
     e = s;
     tree = new ArrayList<String>();
     parseExpression(e);
+    for(int i = 0; i < tree.size(); i++) {
+      if (tree.get(i).equals("")) tree.set(i, "0");
+    }
   }
 
   //creates an expression tree based on the string equation
@@ -126,6 +129,7 @@ class Function {
   ArrayList<String> getTree() {
     return tree;
   }
+<<<<<<< HEAD
  
 
   void draw(Grid n) {
@@ -176,6 +180,27 @@ class Function {
     if (r.length > index) {
       ArrayDeque<Float> stack = new ArrayDeque<Float>();
       for (int i = r.length-1; i >= index; i--) {
+=======
+  void draw(Grid n) {
+    for (int i = 300; i < 300 + 899; i++) {
+      float x1 = n.rx(i);
+      float y1 = evaluate(x1);
+      float x2 = n.rx(i+1);
+      float y2 = evaluate(x2);
+      n.connect(x1, y1, x2, y2);
+    }
+  }
+  float evaluate(float x) {
+    String[] r = tree.toArray(new String[0]);
+    for (int i = 0; i < r.length; i++) {
+      if (r[i].equals("x")) {
+        r[i] = "" + x;
+      }
+    }
+    if (r.length > 2) {
+      ArrayDeque<Float> stack = new ArrayDeque<Float>();
+      for (int i = r.length-1; i >= 2; i--) {
+>>>>>>> marko
         if (isFloat(r[i])) {
           stack.addLast(Float.parseFloat(r[i]));
         } else {
