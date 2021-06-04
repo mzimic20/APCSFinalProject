@@ -129,7 +129,7 @@ class Function {
  
 
   void draw(Grid n) {
-    if (tree.get(0).equals("=") && tree.get(1).equals("y") && tree.lastIndexOf("y") < 2) {
+    if (tree.size() >= 2 && tree.get(0).equals("=") && tree.get(1).equals("y") && tree.lastIndexOf("y") < 2) {
       float x1 = n.rx(300);
       float y1 = evaluate(x1,2);
       for (int i = 301; i < 300 + 899; i++) {
