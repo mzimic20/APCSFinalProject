@@ -9,6 +9,9 @@ class Function {
     e = s;
     tree = new ArrayList<String>();
     parseExpression(e);
+    for(int i = 0; i < tree.size(); i++) {
+      if (tree.get(i).equals("")) tree.set(i, "0");
+    }
   }
 
   //creates an expression tree based on the string equation
