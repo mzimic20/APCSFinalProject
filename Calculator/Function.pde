@@ -167,7 +167,6 @@ class Function {
     }
   }
   float evaluate(float v, int index) {
-    print(v,index);
     String[] r = tree.toArray(new String[0]);
     for (int i = 0; i < r.length; i++) {
       if (r[i].equals("x") || r[i].equals("y")) {
