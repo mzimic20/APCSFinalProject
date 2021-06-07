@@ -125,17 +125,51 @@ class Function {
     return tree;
   }
   
-  
-  
-  //initial graphing functions
   void draw(Grid n) {
+    float x1 = PI, y1 = 0;
     for (int i = 300; i < 300 + 899; i++) {
-      float x1 = n.rx(i);
-      float y1 = evaluate(x1);
-      float x2 = n.rx(i+1);
-      float y2 = evaluate(x2);
-      n.connect(x1, y1, x2, y2);
+      /*
+      if (which) {
+        x1 = n.rx(i);
+        y1 = evaluate(x1);
+        float x2 = n.rx(i+1);
+        float y2 = evaluate(x2);
+        n.connect(x1, y1, x2, y2);
+      }
+      else {
+        */
+        for(int y = 0; y < 899; y++) {
+          float xcor = n.rx(i);
+          float ycor = n.ry(y);
+          if (evaluate(xcor, ycor)) {
+            if (x1 != PI) n.connect(x1, y1, xcor, ycor);
+            else point(i, y);
+            x1 = xcor;
+            y1 = ycor;
+          }
+      //  }
+      }
     }
+  }
+  
+  boolean evaluate(float x, float y) {
+    ArrayList<String> stack = new ArrayList<String>();
+    for(int i = 0; i < tree.size(); i++) {
+      if (tree.get(i).equals("x")) stack.add("" + x);
+      else if (tree.get(i).equals("y")) stack.add("" + y);
+      else stack.add(tree.get(i));
+    }
+    for(int i = stack.size() - 1; i >= 0 && stack.size() > 3; i--) {
+      if (stack.get(i).equals("+")) stack.set(i, "" + (Float.parseFloat(stack.remove(i + 1)) + Float.parseFloat(stack.remove(i + 2))));
+      else if (stack.get(i).equals("-")) stack.set(i, "" + (Float.parseFloat(stack.remove(i + 1)) - Float.parseFloat(stack.remove(i + 2))));
+      else if (stack.get(i).equals("*")) stack.set(i, "" + (Float.parseFloat(stack.remove(i + 1)) * Float.parseFloat(stack.remove(i + 2))));
+      else if (stack.get(i).equals("/")) stack.set(i, "" + (Float.parseFloat(stack.remove(i + 1)) / Float.parseFloat(stack.remove(i + 2))));
+      else if (stack.get(i).equals("^")) stack.set(i, "" + Math.pow(Float.parseFloat(stack.remove(i + 1)), Float.parseFloat(stack.remove(i + 2))));
+      else if (stack.get(i).equals("=")) {
+        if (Math.abs(Float.parseFloat(stack.remove(i + 1)) - Float.parseFloat(stack.remove(i + 2))) < .001) return true;
+      }
+    }
+    return false;
   }
   
   float evaluate(float x) {
@@ -187,47 +221,6 @@ class Function {
     }
     return 0;
   }
-  
-  
-  
-  //new graphing relations that can handle nonfunction relations
-  //evaluates the expression for the given x and y values 
-  boolean evaluate(float x, float y) {
-    ArrayList<String> t = new ArrayList<String>();
-    for(int i = 0; i < tree.size(); i++) {
-      if (tree.get(i) == "x") t.add("" + x);
-      else if (tree.get(i) == "y") t.add("" + y);
-      else t.add(t.get(i));
-    }
-    if (!(t.contains("="))) {
-      t.add(0, "=");
-      t.add(1, "y");
-    }
-    if (t.size() > 2) {
-      for(int i = t.size() - 3; i >= 0; i--) {
-        if (t.get(i) == "+") t.set(i, "" + (Float.parseFloat(t.remove(i + 1)) + Float.parseFloat(t.remove(i + 2))));
-        else if (t.get(i) == "-") t.set(i, "" + (Float.parseFloat(t.remove(i + 1)) - Float.parseFloat(t.remove(i + 2))));
-        else if (t.get(i) == "*") t.set(i, "" + (Float.parseFloat(t.remove(i + 1)) * Float.parseFloat(t.remove(i + 2))));
-        else if (t.get(i) == "/") t.set(i, "" + (Float.parseFloat(t.remove(i + 1)) / Float.parseFloat(t.remove(i + 2))));
-        else if (t.get(i) == "^") t.set(i, "" + Math.pow(Float.parseFloat(t.remove(i + 1)), Float.parseFloat(t.remove(i + 2))));
-        else if (t.get(i) == "=") {
-          if (Math.abs(Float.parseFloat(t.remove(i + 1)) - Float.parseFloat(t.remove(i + 2))) < .001) return true;
-        }
-      }
-    }
-    return false;
-  }
-  
-  void draw() {
-    stroke(0);
-    for(int x = 300; x < 300 + 900; x++) {
-      for(int y = 0; y < 900; y++) {
-        if (evaluate(n.rx(x), n.ry(y))) point(x, y);
-      }
-    }
-  }
-  
-  
   
   boolean isFloat(String str) {
     try {
