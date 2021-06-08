@@ -32,11 +32,22 @@ Marko: Mother Zimic decided to make today a cleaning today so I couldn't do any 
 Marko: parseExpression now correctly parses parentheses and makes appropriate trees, added a new if statement to correctly identify distribution multiplication that looks like 4(x-1).\
 Christopher: Helped a little bit in parseExpression, debugging some of my previous code and leaving comments. I completed the visual part of displaying the functions based on Marko's tree.
 
+**5/31/2021**\
+Marko: Updated code to match Christopher's branch. Fixed a couple of bugs.
+
 **6/1/2021**\
-Christopher: I made a few slight changes to the design from line size to text readjustment.
+Christopher: I made a few slight changes to the design from line size to text readjustment.\
+Marko: Modified parseExpression() to scan the input from TextBox from right to left to resolve conflicts that arose due to the associative and commutative properties.
 
 **6/2/2021**\
 Christopher: I allowed equations of the form x=f(y) to be evaluated and graphed. I also assumed a f(x) default case when there is no equation or equal sign.
 
 **6/3/2021**\
-Christopher: Worked on merging branches and fixing last minute errors, outlined presentation.
+Christopher: Worked on merging branches and fixing last minute errors, outlined presentation.\
+Marko: Fixed a bug, allowing parseExpression() to read input like -x as -1 * x.
+
+**6/6/2021**\
+Marko: Wrote two versions of new evaluate() and draw() methods, both of which did not work after I spent the 4th and 5th thinking about potential algorithms and pseudocode for the methods.
+
+**6/7/2021**\
+Marko: Worked on revising the algorithms and pseudocode developed for the new evaluate() and draw() methods over the weekend.
