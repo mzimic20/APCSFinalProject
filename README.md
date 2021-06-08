@@ -51,3 +51,4 @@ Marko: Wrote two versions of new evaluate() and draw() methods, both of which di
 
 **6/7/2021**\
 Marko: Worked on revising the algorithms and pseudocode developed for the new evaluate() and draw() methods over the weekend.
+Christopher: I was working on writing sudocode for the variables class, and its implementation into the TextBox classes.
