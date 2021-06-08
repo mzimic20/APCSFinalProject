@@ -99,6 +99,11 @@ class Function {
     }
   }
 
+  //evaluates the expression for the given x and y values 
+  boolean evaluate(int index, float x, float y) {
+    return false;
+  }
+
   //tests whether or not the specified index is in a parenthetical expression
   boolean pbounds(String s, int index) {
     int count = 0;
@@ -124,64 +129,55 @@ class Function {
   ArrayList<String> getTree() {
     return tree;
   }
-  
+
   void draw(Grid n) {
-    float x1 = PI, y1 = 0;
-    for (int i = 300; i < 300 + 899; i++) {
-      /*
-      if (which) {
-        x1 = n.rx(i);
-        y1 = evaluate(x1);
+    if (tree.get(0).equals("=") && tree.get(1).equals("y") && tree.lastIndexOf("y") < 2) {
+      float x1 = n.rx(300);
+      float y1 = evaluate(x1,2);
+      for (int i = 301; i < 300 + 899; i++) {
         float x2 = n.rx(i+1);
-        float y2 = evaluate(x2);
+        float y2 = evaluate(x2,2);
         n.connect(x1, y1, x2, y2);
+        x1 = x2;
+        y1 = y2;
       }
-      else {
-        */
-        for(int y = 0; y < 899; y++) {
-          float xcor = n.rx(i);
-          float ycor = n.ry(y);
-          if (evaluate(xcor, ycor)) {
-            if (x1 != PI) n.connect(x1, y1, xcor, ycor);
-            else point(i, y);
-            x1 = xcor;
-            y1 = ycor;
-          }
-      //  }
+      return;
+    }
+    if (tree.get(0).equals("=") && tree.get(1).equals("x") && tree.lastIndexOf("x") < 2) {
+      float y1 = n.ry(900);
+      float x1 = evaluate(y1,2);
+      for (int i = 900; i >= 0; i--) {
+        float y2 = n.ry(i-1);
+        float x2 = evaluate(y2,2);
+        n.connect(x1,y1,x2,y2);
+        x1 = x2;
+        y1 = y2;
       }
+      return;
+    }
+    if (!tree.contains("=") && (!tree.contains("y") && tree.contains("x"))) {
+      float x1 = n.rx(300);
+      float y1 = evaluate(x1,0);
+      for (int i = 301; i < 300 + 899; i++) {
+        float x2 = n.rx(i+1);
+        float y2 = evaluate(x2,0);
+        n.connect(x1, y1, x2, y2);
+        x1 = x2;
+        y1 = y2;
+      }
+      return;
     }
   }
-  
-  boolean evaluate(float x, float y) {
-    ArrayList<String> stack = new ArrayList<String>();
-    for(int i = 0; i < tree.size(); i++) {
-      if (tree.get(i).equals("x")) stack.add("" + x);
-      else if (tree.get(i).equals("y")) stack.add("" + y);
-      else stack.add(tree.get(i));
-    }
-    for(int i = stack.size() - 1; i >= 0 && stack.size() > 3; i--) {
-      if (stack.get(i).equals("+")) stack.set(i, "" + (Float.parseFloat(stack.remove(i + 1)) + Float.parseFloat(stack.remove(i + 2))));
-      else if (stack.get(i).equals("-")) stack.set(i, "" + (Float.parseFloat(stack.remove(i + 1)) - Float.parseFloat(stack.remove(i + 2))));
-      else if (stack.get(i).equals("*")) stack.set(i, "" + (Float.parseFloat(stack.remove(i + 1)) * Float.parseFloat(stack.remove(i + 2))));
-      else if (stack.get(i).equals("/")) stack.set(i, "" + (Float.parseFloat(stack.remove(i + 1)) / Float.parseFloat(stack.remove(i + 2))));
-      else if (stack.get(i).equals("^")) stack.set(i, "" + Math.pow(Float.parseFloat(stack.remove(i + 1)), Float.parseFloat(stack.remove(i + 2))));
-      else if (stack.get(i).equals("=")) {
-        if (Math.abs(Float.parseFloat(stack.remove(i + 1)) - Float.parseFloat(stack.remove(i + 2))) < .001) return true;
-      }
-    }
-    return false;
-  }
-  
-  float evaluate(float x) {
+  float evaluate(float v, int index) {
     String[] r = tree.toArray(new String[0]);
     for (int i = 0; i < r.length; i++) {
-      if (r[i].equals("x")) {
-        r[i] = "" + x;
+      if (r[i].equals("x") || r[i].equals("y")) {
+        r[i] = "" + v;
       }
     }
-    if (r.length > 2) {
+    if (r.length > index) {
       ArrayDeque<Float> stack = new ArrayDeque<Float>();
-      for (int i = r.length-1; i >= 2; i--) {
+      for (int i = r.length-1; i >= index; i--) {
         if (isFloat(r[i])) {
           stack.addLast(Float.parseFloat(r[i]));
         } else {
@@ -221,7 +217,6 @@ class Function {
     }
     return 0;
   }
-  
   boolean isFloat(String str) {
     try {
       Float.parseFloat(str);
