@@ -37,3 +37,6 @@ Christopher: I made a few slight changes to the design from line size to text re
 
 **6/2/2021**\
 Christopher: I allowed equations of the form x=f(y) to be evaluated and graphed. I also assumed a f(x) default case when there is no equation or equal sign.
+
+**6/3/2021**\
+Christopher: Worked on merging branches and fixing last minute errors, outlined presentation.
