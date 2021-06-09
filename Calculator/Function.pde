@@ -127,8 +127,8 @@ class Function {
     return tree;
   }
  
-
   void draw(Grid n) {
+    //y=f(x)
     if (tree.size() >= 2 && tree.get(0).equals("=") && tree.get(1).equals("y") && tree.lastIndexOf("y") < 2) {
       float x1 = n.rx(300);
       float y1 = evaluate(x1,2);
@@ -141,6 +141,7 @@ class Function {
       }
       return;
     }
+    //x=f(y)
     if (tree.size() >= 2 && tree.get(0).equals("=") && tree.get(1).equals("x") && tree.lastIndexOf("x") < 2) {
       float y1 = n.ry(900);
       float x1 = evaluate(y1,2);
@@ -153,6 +154,7 @@ class Function {
       }
       return;
     }
+    //defaults to f(x) if there is no equation
     if (!tree.contains("=") && (!tree.contains("y") && tree.contains("x"))) {
       float x1 = n.rx(300);
       float y1 = evaluate(x1,0);
@@ -166,6 +168,7 @@ class Function {
       return;
     }
   }
+  //evaluates the tree using an infix calculator
   float evaluate(float v, int index) {
     String[] r = tree.toArray(new String[0]);
     for (int i = 0; i < r.length; i++) {

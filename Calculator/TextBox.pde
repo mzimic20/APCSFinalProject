@@ -3,14 +3,13 @@ class TextBox {
   private String e;
   private int rank;
   private boolean clicked, error;
-  private Function f;
+  private Object o;
   
   TextBox(int r) {
     e = "";
     rank = r;
     clicked = false;
     error = false;
-    f = new Function(e);
   }
   
   void draw() {
@@ -32,7 +31,9 @@ class TextBox {
     text(e, 30 + 10 * (int) (log(rank+1) / log(10)), rank * 90 + 52.5);
     
     //graph
-    f.draw(n);
+    if (o instanceof Function) {
+      ((Function) o).draw(n);
+    }
   }
   
   boolean getStatus() {
@@ -41,27 +42,32 @@ class TextBox {
   
   //modifies the text by concatenating to the string
   void add(char c) {
-    e += c;
-    //tests for whether or not parentheses are balanced, if not, it does not graph
-    if (f.pbounds(e, e.length() - 1)) {
-      error = false;
-      this.updateF();
-      //IMPLEMENT GRAPHING HERE
+      e += c;
+      this.updateO();
+    if (o instanceof Function) {
+      Function f = (Function) o;
+      //tests for whether or not parentheses are balanced, if not, it does not graph
+      if (f.pbounds(e, e.length() - 1)) {
+        error = false;
+        this.updateO();
+      }
+      else error = true;
     }
-    else error = true;
   }
   
   //modifies the text by removing from the string
   void remove() {
-    if (!e.isEmpty()) e = e.substring(0, e.length() - 1);
-    this.updateF();
-    //tests for whether or not parentheses are balanced, if not, it does not graph
-    if (f.pbounds(e, e.length() - 1)) {
-      error = false;
-      this.updateF();
-      //IMPLEMENT GRAPHING HERE
+      if (!e.isEmpty()) e = e.substring(0, e.length() - 1);
+      this.updateO();
+    if (o instanceof Function) {
+      Function f = (Function) o;
+      //tests for whether or not parentheses are balanced, if not, it does not graph
+      if (f.pbounds(e, e.length() - 1)) {
+        error = false;
+        this.updateO();
+      }
+      else error = true;
     }
-    else error = true;
   }
   
   //changes the selection status and coloration of the textbox
@@ -72,12 +78,7 @@ class TextBox {
     else clicked = false;
   }
   
-  void updateF() {
-    f = new Function(e);
+  void updateO() {
+    o = new Function(e);
   }
-  
-  Function getF() {
-    return f;
-  }
-
 }
