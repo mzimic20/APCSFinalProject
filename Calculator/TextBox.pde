@@ -2,8 +2,8 @@ import java.util.Arrays;
 class TextBox {
 
   private String e;
-  private int rank;
-  private boolean clicked, error;
+  int rank;
+  boolean clicked, error;
   private Object o;
 
   TextBox(int r) {
@@ -36,6 +36,9 @@ class TextBox {
       for (int i = 0; i < ((ArrayList) o).size(); i++) {
         ((Function)((ArrayList) o).get(i)).draw(n);
       }
+    }
+    if (o instanceof Slider) {
+      //((Slider) o).
     }
   }
 
@@ -114,7 +117,6 @@ class TextBox {
           //((ArrayList<Conic>) o).add(new Conic(edited));
         } else {
           ((ArrayList<Function>) o).add(new Function(edited));
-          println(edited);
         }
       }}
        else {

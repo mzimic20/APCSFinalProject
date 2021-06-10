@@ -2,6 +2,7 @@ Grid n = new Grid();
 ArrayList<TextBox> boxes;
 float[] center = null;
 HashMap<Character, String> vars = new HashMap<Character, String>();
+TextBox next = null;
 
 void setup() {
   size(1200, 900);
@@ -18,7 +19,6 @@ void draw() {
     t.draw();
   }
   n.draw();
-  print(vars);
 }
 
 void mouseWheel(MouseEvent event) {
@@ -43,14 +43,28 @@ void keyPressed() {
   TextBox target = null;
   for (TextBox b : boxes) {
     if (b.getStatus()) {
-      if (key == BACKSPACE) b.remove();
-      else if (key != CODED) b.add(key);
+      if (key == TAB || key == ENTER || key == ' ') {next=b;} 
+      else if (key == BACKSPACE) b.remove();
+      else if (key != CODED) {
+        b.add(key);
+      }
       target = b;
     }
-} for (TextBox b : boxes) {
-  b.updateO();
+  } 
+  for (TextBox b : boxes) {
+    b.updateO();
+  }
 }
+
+void keyReleased() {
+  if (next != null) {
+    next.clicked = false;
+    boxes.get((next.rank+1) % 10).clicked = true;
+    next = null;
+  }
 }
+
+void keyClicked(){}
 
 
 void mouseClicked() {

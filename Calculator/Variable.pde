@@ -23,6 +23,13 @@ class Slider implements Variable {
     } else {
       vars.remove(name);
     }
+    Float n = Float.parseFloat(e);
+    if (n < lbound) {
+      lbound = n;
+    }
+    if (n > rbound) {
+      rbound = n;
+    }
   }
 }
 
