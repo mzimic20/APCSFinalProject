@@ -45,10 +45,12 @@ void keyPressed() {
       if (key == BACKSPACE) b.remove();
       else if (key != CODED) b.add(key);
       target = b;
+      for (TextBox j: boxes) {
+        j.updateO();
+      }}
     }
   }
-  System.out.println(vars);
-}
+
 
 void mouseClicked() {
   for (TextBox b : boxes) {
