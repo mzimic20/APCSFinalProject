@@ -57,4 +57,4 @@ Christopher: I was working on writing sudocode for the variables class, and its 
 Christopher: Worked a bit on differentiating input (as in separating variables from functions and nonfunctions and making different code that deals with different inputs).
 
 **6/9/2021**\
-Christopher: Continued to work on differentiating input as well as working on creating the variables class, then implementing it into the TextBox.
+Christopher: Continued to work on differentiating input as well as working on creating the variables class, then implementing it into the TextBox. I also worked on learning how Maps work and trying to use them as a variable storage container, rewriting much of the logic that doesn't accept variables.
