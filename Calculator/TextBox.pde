@@ -11,7 +11,7 @@ class TextBox {
     rank = r;
     clicked = false;
     error = false;
-    if (e.indexOf("x^2") < e.indexOf("=") && e.indexOf("y^2") < e.indexOf("=")) c = new Conic(e);
+    if (e.contains("x") && e.contains("y") && (e.indexOf("x") < e.indexOf("=") && e.indexOf("y") < e.indexOf("=")) && e.length() > e.indexOf("=") + 1) c = new Conic(e);
     else f = new Function(e);
   }
   
@@ -34,7 +34,8 @@ class TextBox {
     text(e, 30 + 10 * (int) (log(rank+1) / log(10)), rank * 90 + 52.5);
     
     //graph
-    f.draw(n);
+    if (c != null) c.draw(n);
+    else f.draw(n);
   }
   
   boolean getStatus() {
@@ -48,7 +49,7 @@ class TextBox {
     if (f.pbounds(e, e.length() - 1)) {
       error = false;
       this.updateF();
-      //IMPLEMENT GRAPHING HERE
+      this.updateC();
     }
     else error = true;
   }
@@ -61,7 +62,7 @@ class TextBox {
     if (f.pbounds(e, e.length() - 1)) {
       error = false;
       this.updateF();
-      //IMPLEMENT GRAPHING HERE
+      this.updateC();
     }
     else error = true;
   }
@@ -80,6 +81,10 @@ class TextBox {
   
   Function getF() {
     return f;
+  }
+  
+  void updateC() {
+    if (e.contains("x") && e.contains("y") && (e.indexOf("x") < e.indexOf("=") && e.indexOf("y") < e.indexOf("=")) && e.length() > e.indexOf("=") + 1) c = new Conic(e);
   }
 
 }

@@ -17,6 +17,12 @@ void draw() {
     t.draw();
   }
   n.draw();
+  /*
+  Conic c = new Conic("(x+1)^2/49+(y-2)^2/4=1");
+  c.getInfo();
+  println();
+  c.draw(n);
+  */
 }
 
 void mouseWheel(MouseEvent event) {
@@ -46,7 +52,7 @@ void keyPressed() {
       target = b;
     }
   }
-  if (target != null) print(target.getF().getTree());
+  //if (target != null) print(target.getF().getTree());
 }
 
 void mouseClicked() {

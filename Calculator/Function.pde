@@ -99,11 +99,6 @@ class Function {
     }
   }
 
-  //evaluates the expression for the given x and y values 
-  boolean evaluate(int index, float x, float y) {
-    return false;
-  }
-
   //tests whether or not the specified index is in a parenthetical expression
   boolean pbounds(String s, int index) {
     int count = 0;
