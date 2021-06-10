@@ -50,5 +50,11 @@ Marko: Fixed a bug, allowing parseExpression() to read input like -x as -1 * x.
 Marko: Wrote two versions of new evaluate() and draw() methods, both of which did not work after I spent the 4th and 5th thinking about potential algorithms and pseudocode for the methods.
 
 **6/7/2021**\
-Marko: Worked on revising the algorithms and pseudocode developed for the new evaluate() and draw() methods over the weekend.
+Marko: Worked on revising the algorithms and pseudocode developed for the new evaluate() and draw() methods over the weekend.\
 Christopher: I was working on writing sudocode for the variables class, and its implementation into the TextBox classes.
+
+**6/8/2021**\
+Christopher: Worked a bit on differentiating input (as in separating variables from functions and nonfunctions and making different code that deals with different inputs).
+
+**6/9/2021**\
+Christopher: Continued to work on differentiating input as well as working on creating the variables class, then implementing it into the TextBox.
