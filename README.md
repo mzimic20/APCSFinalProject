@@ -58,3 +58,6 @@ Christopher: Worked a bit on differentiating input (as in separating variables f
 
 **6/9/2021**\
 Christopher: Continued to work on differentiating input as well as working on creating the variables class, then implementing it into the TextBox. I also worked on learning how Maps work and trying to use them as a variable storage container, rewriting much of the logic that doesn't accept variables.
+
+**6/10/2021**\
+Christopher: I got the variables to start working, uniting the code with Marko's should not be too difficult. I will probably start work on an instruction manuel to make sure that the user doesn't break any code.
