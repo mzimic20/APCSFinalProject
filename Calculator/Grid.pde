@@ -102,8 +102,6 @@ public class Grid {
     bound[3] -= (nmy-y);
   }
   void connect(float x1, float y1, float x2, float y2) {
-    stroke(120);
     line(sx(x1),sy(y1),sx(x2),sy(y2));
-    stroke(191);
   }
 }

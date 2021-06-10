@@ -42,7 +42,6 @@ class Conic {
   }
   
   void draw(Grid n) {
-    stroke(0);
     noFill();
     float vt = center[1] + vaxis;
     float vb = center[1] - vaxis;

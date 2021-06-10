@@ -62,9 +62,9 @@ class Function {
           }
           //test for notation like 3x and count it as multiplication
           else if (i > 0 && (s.charAt(i) == 'x' || s.charAt(i) == 'y') && this.pbounds(s, i) &&
-            (s.charAt(i - 1) != '+' || s.charAt(i - 1) != '-' || 
-            s.charAt(i - 1) != '*' || s.charAt(i - 1) != '/' || 
-            s.charAt(i - 1) != '^')) {
+            !(s.charAt(i - 1) == '+' || s.charAt(i - 1) == '-' || 
+            s.charAt(i - 1) == '*' || s.charAt(i - 1) == '/' || 
+            s.charAt(i - 1) == '^')) {
             tree.add("*");
             parseExpression(s.substring(0, i));
             parseExpression(s.substring(i, s.length()));
@@ -163,6 +163,7 @@ class Function {
       return;
     }
   }
+  
   float evaluate(float v, int index) {
     String[] r = tree.toArray(new String[0]);
     for (int i = 0; i < r.length; i++) {
