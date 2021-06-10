@@ -1,6 +1,7 @@
 interface Variable {
   public abstract void draw();
   public abstract String value();
+  public abstract void set(int v);
 }
 
 class Slider implements Variable {
@@ -22,10 +23,16 @@ class Slider implements Variable {
 
 class List implements Variable {
   String name;
-  int[] values;
+  int value;
+  public List(String n) {
+    name = n;
+  }
   void draw() {
   }
   String value() {
     return "";
+  }
+  void set(int v) {
+    value = v;
   }
 }

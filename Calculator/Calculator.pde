@@ -1,7 +1,6 @@
 Grid n = new Grid();
 ArrayList<TextBox> boxes;
 float[] center = null;
-ArrayList<Variable> vars;
 
 void setup() {
   size(1200, 900);
@@ -9,9 +8,6 @@ void setup() {
   boxes = new ArrayList<TextBox>();
   for(int i = 0; i < 10; i++) {
     boxes.add(new TextBox(i));
-  }
-  for(char i = 'a'; i <= 'z'; i++) {
-    //vars.add(new Slider(""+i));
   }
 }
 
