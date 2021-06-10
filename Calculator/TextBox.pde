@@ -102,14 +102,12 @@ class TextBox {
         String edited = e;
         for (Character key : vars.keySet()) {
           String[] r = vars.get(key).split(",");
-          print(Arrays.toString(r));
           if (r.length-1 < i) {
             edited = edited.replace(key, '0');
           } else {
             edited = edited.replace(""+key, r[i]);
           }
         }
-        print(edited);
         //replaces variables with their proper values
         if (e.contains("x^2") && e.contains("y^2")) {
           //((ArrayList<Conic>) o).add(new Conic(edited));
@@ -124,7 +122,7 @@ class TextBox {
             ((ArrayList<Function>) o).add(new Function(e));
           }
       }
-    } else if (e.length() > 2 && e.contains("=")) {
+    } else if (e.length() >= 2 && e.contains("=")) {
       if (e.contains(",") || e.contains("[") || e.contains("]")) {
         o = new List(e.charAt(0));
       } else {
