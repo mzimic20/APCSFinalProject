@@ -1,26 +1,20 @@
 Grid n = new Grid();
 ArrayList<TextBox> boxes;
 float[] center = null;
-HashMap<Character, String> vars = new HashMap<Character,String>();
+HashMap<Character, String> vars = new HashMap<Character, String>();
 
 void setup() {
   size(1200, 900);
   background(240);
   boxes = new ArrayList<TextBox>();
-  for(int i = 0; i < 10; i++) {
+  for (int i = 0; i < 10; i++) {
     boxes.add(new TextBox(i));
-  }
-  for(char i = 'a'; i <= 'z'; i++) {
-    vars.put(i,"0");
-  }
-  for(char i = 'A'; i <= 'Z'; i++) {
-    vars.put(i,"0");
   }
 }
 
 void draw() {
   background(240);
-  for(TextBox t : boxes) {
+  for (TextBox t : boxes) {
     t.draw();
   }
   n.draw();
@@ -31,7 +25,7 @@ void mouseWheel(MouseEvent event) {
 }
 
 void mousePressed(MouseEvent event) {
-  center = new float[] {n.rx(mouseX),n.ry(mouseY)};
+  center = new float[] {n.rx(mouseX), n.ry(mouseY)};
 }
 
 void mouseReleased(MouseEvent event) {
@@ -40,23 +34,24 @@ void mouseReleased(MouseEvent event) {
 
 void mouseDragged(MouseEvent event) {
   if (center != null && mouseX > 300) {
-    n.move(center[0],center[1],mouseX,mouseY);
+    n.move(center[0], center[1], mouseX, mouseY);
   }
 }
 
 void keyPressed() {
   TextBox target = null;
-  for(TextBox b : boxes) {
+  for (TextBox b : boxes) {
     if (b.getStatus()) {
       if (key == BACKSPACE) b.remove();
       else if (key != CODED) b.add(key);
       target = b;
     }
   }
+  System.out.println(vars);
 }
 
 void mouseClicked() {
-  for(TextBox b : boxes) {
+  for (TextBox b : boxes) {
     b.changeStatus();
   }
 }

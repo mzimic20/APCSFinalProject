@@ -30,8 +30,6 @@ class List implements Variable {
     e = e.replace("]","");
     if (e.length() >= 1) {
       vars.put(name,e);
-    } else {
-      vars.put(name,"0");
     }
   }
 }
