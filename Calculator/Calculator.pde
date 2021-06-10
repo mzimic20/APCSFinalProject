@@ -46,7 +46,7 @@ void keyPressed() {
       else if (key != CODED) b.add(key);
       target = b;
     }
-  b.updateO();  
+  b.updateO();
 }
 }
 

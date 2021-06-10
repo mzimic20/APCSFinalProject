@@ -83,7 +83,9 @@ class TextBox {
   }
 
   void updateO() {
-    //determines max length of all lists
+    //replaces variables in equation with correct value
+    if (e.contains("x") || e.contains("y")) {
+      //determines max length of all lists
     int l = 0;
     for (Character key : vars.keySet()) {
       int j = vars.get(key).split(",").length;
@@ -91,13 +93,12 @@ class TextBox {
         l = j;
       }
     }
-    //replaces variables in equation with correct value
-    if (e.contains("x") || e.contains("y")) {
       if (e.contains("x^2") && e.contains("y^2")) {
         //o = new ArrayList<Conic>();
       } else {
         o = new ArrayList<Function>();
       }
+      if (l != 0) {
       for (int i = 0; i < l; i++) {
         String edited = e;
         for (Character key : vars.keySet()) {
@@ -114,8 +115,8 @@ class TextBox {
         } else {
           ((ArrayList<Function>) o).add(new Function(edited));
         }
-      }
-      if (l == 0) {
+      }}
+       else {
         if (e.contains("x^2") && e.contains("y^2")) {
             //((ArrayList<Conic>) o).add(new Conic(e));
           } else {
