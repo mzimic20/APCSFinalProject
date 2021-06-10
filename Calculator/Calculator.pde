@@ -18,6 +18,7 @@ void draw() {
     t.draw();
   }
   n.draw();
+  print(vars);
 }
 
 void mouseWheel(MouseEvent event) {
@@ -46,6 +47,7 @@ void keyPressed() {
       else if (key != CODED) b.add(key);
       target = b;
     }
+} for (TextBox b : boxes) {
   b.updateO();
 }
 }

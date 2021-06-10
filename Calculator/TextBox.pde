@@ -114,6 +114,7 @@ class TextBox {
           //((ArrayList<Conic>) o).add(new Conic(edited));
         } else {
           ((ArrayList<Function>) o).add(new Function(edited));
+          println(edited);
         }
       }}
        else {
