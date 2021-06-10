@@ -76,18 +76,21 @@ class TextBox {
   }
 
   void updateO() {
-    if (e.contains("x") || e.contains("y")) {
-      if (e.contains("x^2") && e.contains("y^2")) {
-        //o = new Conic(e);
-      } else {
-        o = new Function(e);
-      }
-    } else {
-      if (e.contains("[")) {
-        o = new List(""+e.charAt(0));
-      } else {
-        o = new Slider(""+e.charAt(0));
-      }
-    }
+        String edited = e;
+        if (e.contains("x") || e.contains("y")) {
+          //replaces variables with their proper values
+            if (e.contains("x^2") && e.contains("y^2")) {
+              //o = new Conic(edited);
+            } else {
+              o = new Function(edited);
+            }
+        } else if (e.length() > 2) {
+          if (e.contains(",")) {
+            o = new List(e.charAt(0));
+          } else {
+            o = new Slider(e.charAt(0));
+          }
+          ((Variable) o).set(e.substring(2));
+        }
   }
 }

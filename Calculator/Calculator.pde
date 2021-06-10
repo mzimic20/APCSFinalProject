@@ -1,6 +1,7 @@
 Grid n = new Grid();
 ArrayList<TextBox> boxes;
 float[] center = null;
+HashMap<Character, String> vars = new HashMap<Character,String>();
 
 void setup() {
   size(1200, 900);
@@ -8,6 +9,12 @@ void setup() {
   boxes = new ArrayList<TextBox>();
   for(int i = 0; i < 10; i++) {
     boxes.add(new TextBox(i));
+  }
+  for(char i = 'a'; i <= 'z'; i++) {
+    vars.put(i,"0");
+  }
+  for(char i = 'A'; i <= 'Z'; i++) {
+    vars.put(i,"0");
   }
 }
 
