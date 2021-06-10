@@ -104,7 +104,7 @@ class TextBox {
         for (Character key : vars.keySet()) {
           String[] r = vars.get(key).split(",");
           if (r.length-1 < i) {
-            edited = edited.replace(key, '0');
+            continue;
           } else {
             edited = edited.replace(""+key, r[i]);
           }
