@@ -8,30 +8,37 @@ class Conic {
     e = s;
     vaxis = parseVaxis();
     haxis = parseHaxis();
-    //center = parseCenter();
+    center = parseCenter();
   }
   
   float parseVaxis() {
-    if (e.charAt(e.indexOf("y^2") + 3) == '/') {
-      float l = getNum(e.indexOf("y^2") + 3);
-      return l;
-    }
-    return 0;
+    if (e.contains("y^2")) return Float.parseFloat(e.substring(e.indexOf("=") + 1, e.length()));
+    else return Float.parseFloat(e.substring(e.lastIndexOf("^2/"), e.indexOf("=")));
   }
   
   float parseHaxis() {
-    if (e.charAt(e.indexOf("x^2") + 3) == '/') {
-      float l = getNum(e.indexOf("x^2") + 3);
-      return l;
-    }
-    return 0;
+    if (e.contains("x^2")) return Float.parseFloat(e.substring(e.indexOf("=") + 1, e.length()));
+    else return Float.parseFloat(e.substring(e.indexOf("^2/"), e.indexOf("=")));
   }
   
-  float getNum(int index) {
-    for(int i = index; i < e.length(); i++) {
-      if (!Character.isDigit(e.charAt(i))) return Float.parseFloat(e.substring(index, i));
+  float[] parseCenter() {
+    float[] coords = new float[2];
+    int x = e.indexOf("x");
+    if (x > 0 && e.charAt(x - 1) == '(' && (e.charAt(x + 1) == '+' || e.charAt(x + 1) == '-')) {
+      coords[0] = Float.parseFloat(e.substring(x + 2, e.indexOf(')')));
     }
-    return 0;
+    else coords[0] = 0;
+    int y = e.indexOf("y");
+    if (y > 0 && e.charAt(y - 1) == '(' && (e.charAt(y + 1) == '+' || e.charAt(y + 1) == '-')) {
+      coords[1] = Float.parseFloat(e.substring(y + 2, e.lastIndexOf(')')));
+    }
+    else coords[1] = 0;
+    return coords;
+  }
+  
+  void draw(Grid n) {
+    stroke(0);
+    ellipse(n.sx(center[0]), n.sy(center[1]), n.sy(haxis), n.sy(vaxis));
   }
   
 }

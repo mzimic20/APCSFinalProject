@@ -4,13 +4,15 @@ class TextBox {
   private int rank;
   private boolean clicked, error;
   private Function f;
+  private Conic c;
   
   TextBox(int r) {
     e = "";
     rank = r;
     clicked = false;
     error = false;
-    f = new Function(e);
+    if (e.indexOf("x^2") < e.indexOf("=") && e.indexOf("y^2") < e.indexOf("=")) c = new Conic(e);
+    else f = new Function(e);
   }
   
   void draw() {
