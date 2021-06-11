@@ -12,8 +12,12 @@ class Conic {
   }
   
   float parseVaxis() {
-    if (!e.contains("^2/")) return (float)Math.sqrt(Double.parseDouble(e.substring(e.indexOf("=") + 1, e.length())));
-    else return (float)Math.sqrt(Double.parseDouble(e.substring(e.lastIndexOf("^2/") + 3, e.indexOf("="))));
+    try {
+      if (!e.contains("^2/")) return (float)Math.sqrt(Double.parseDouble(e.substring(e.indexOf("=") + 1, e.length())));
+      else return (float)Math.sqrt(Double.parseDouble(e.substring(e.lastIndexOf("^2/") + 3, e.indexOf("="))));
+    } catch (Exception e) {
+    }
+    return 0;
   }
   
   float parseHaxis() {
