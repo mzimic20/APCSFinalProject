@@ -46,7 +46,7 @@ void keyPressed() {
       target = b;
     }
   }
-  if (target != null) print(target.getF().getTree());
+  //if (target != null) print(target.getF().getTree());
 }
 
 void mouseClicked() {

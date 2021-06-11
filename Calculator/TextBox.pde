@@ -4,13 +4,17 @@ class TextBox {
   private int rank;
   private boolean clicked, error;
   private Function f;
+  private Conic c;
+  private Point p;
   
   TextBox(int r) {
     e = "";
     rank = r;
     clicked = false;
     error = false;
-    f = new Function(e);
+    if (e.length() > 0 && e.charAt(0) == '(' && e.charAt(e.length() - 1) == ')' && e.contains(",")) p = new Point(e);
+    else if (e.contains("x") && e.contains("y") && (e.indexOf("x") < e.indexOf("=") && e.indexOf("y") < e.indexOf("=")) && e.length() > e.indexOf("=") + 1) c = new Conic(e);
+    else f = new Function(e);
   }
   
   void draw() {
@@ -30,9 +34,31 @@ class TextBox {
     //equation
     fill(63);
     text(e, 30 + 10 * (int) (log(rank+1) / log(10)), rank * 90 + 52.5);
+
+    //color
+    stroke(genColor());
+    fill(genColor());
+    if (!e.isEmpty()) circle(280, rank * 90 + 45, 5);
     
     //graph
-    f.draw(n);
+    if (p != null) p.draw(n);
+    else if (c != null) c.draw(n);
+    else f.draw(n);
+    stroke(191);
+  }
+  
+  color genColor() {
+    color out = #888888;
+    if (rank == 1) out = #dd6666;
+    else if (rank == 2) out = #6666dd;
+    else if (rank == 3) out = #66dd66;
+    else if (rank == 4) out = #cc55cc;
+    else if (rank == 5) out = #dd8866;
+    else if (rank == 6) out = #66dddd;
+    else if (rank == 7) out = #663366;
+    else if (rank == 8) out = #eeaacc;
+    else if (rank == 9) out = #000000;
+    return out;
   }
   
   boolean getStatus() {
@@ -46,7 +72,8 @@ class TextBox {
     if (f.pbounds(e, e.length() - 1)) {
       error = false;
       this.updateF();
-      //IMPLEMENT GRAPHING HERE
+      this.updateC();
+      this.updateP();
     }
     else error = true;
   }
@@ -59,7 +86,8 @@ class TextBox {
     if (f.pbounds(e, e.length() - 1)) {
       error = false;
       this.updateF();
-      //IMPLEMENT GRAPHING HERE
+      this.updateC();
+      this.updateP();
     }
     else error = true;
   }
@@ -78,6 +106,19 @@ class TextBox {
   
   Function getF() {
     return f;
+  }
+  
+  void updateC() {
+    if (e.contains("x") && e.contains("y") && (e.indexOf("x") < e.indexOf("=") && e.indexOf("y") < e.indexOf("=")) && e.length() > e.indexOf("=") + 1) c = new Conic(e);
+  }
+  
+  void updateP() {
+    if (e.length() > 0 && e.charAt(0) == '(' && e.charAt(e.length() - 1) == ')' && e.contains(",")) p = new Point(e);
+    else p = null;
+  }
+  
+  Point getP() {
+    return p;
   }
 
 }
