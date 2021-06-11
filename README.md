@@ -2,11 +2,28 @@
 
 https://docs.google.com/document/d/1e4tCY54Hs_qL2n1JYY5i5HQ0xJ0pONw4oTB4kWREFcU/edit
 
-Group Name: CalcuLosers
+Group Name: CalcuLosers\
 Group Member Names: Marko Zimic and Christopher Tan
 
 ### Summary
 Our project is a graphing calculator. It will be very similar to applications like Desmos, taking in equation parameters in a field with textboxes and displaying the graphs for the equations on a separate grid field adjacent to the textboxes. The textbox fields will also function as simple calculators, taking basic arithmetic equations and outputting their results nearby. The program will be able to take and graph multiple equations at once and will be able to take all different sorts of equations, from simple constant and linear equations to polynomials, and - eventually, hopefully - parametric equations and conic sections.
+
+## Instructions
+To start the program, open the Processing document and click the start button.\
+To enter equations, click on a textbox. When it is highlighted blue, you may enter an equation by typing it into the box. You may deselect a selected textbox by clicking elsewhere. If a deselected textbox is red, that means there is a parenthetical imbalance error. If there is content in a textbox, a little colored dot will appear on the box's right. The line that corresponds to the entered equation will have the same color as the dot.\
+You can change the grid's field of view by dragging while the mouse is pressed or zooming in and out with the scroll wheel.\
+y must precede all other elements of functions in which y is a function of x, and vice versa.\
+Ellipses and circles must be entered in standard form to be graphed. For ellipses, this is\
+(x-h)^2/a+(y-k)^2/b=1\
+and for circles\
+(x-h)^2+(y-k)^2=r^2\
+Here are some examples of valid equation types and forms.\
+Constant: y=1 x=-1\
+Linear: y=2x+1\
+Quadratic: y=1/2x^2+2x-3\
+Cubic: x=y^3\
+Circle: (x-1)^2+(y+4)^2=9\
+Ellipse: x^2/4+(y+3)^2/16=1
 
 ### Development Log
 **5/25/2021**\
@@ -63,4 +80,4 @@ Marko: Began writing Conic and fixing issues with it.
 
 **6/10/2021**\
 Christopher: I got the variables to start working, uniting the code with Marko's should not be too difficult. I will probably start work on an instruction manual to make sure that the user doesn't break any code.\
-Marko: Finished writing Conic, created and finished Point class, gave each TextBox and corresponding line a unique color.
+Marko: Finished writing Conic, created and finished Point class, gave each TextBox and corresponding line a unique color. Both of us merged our branches into main and did some extra work sorting out conflicts.
