@@ -141,6 +141,9 @@ class TextBox {
             if (r.length-1 < i) {
               continue;
             } else {
+              if (r[i].equals("")) {
+                continue;
+              }
               edited = edited.replace(""+key, r[i]);
             }
           }

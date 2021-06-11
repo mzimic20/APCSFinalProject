@@ -12,7 +12,8 @@ class Slider implements Variable {
   }
   void set(String e) {
     if (e.length() >= 1) {
-      int l = 0;
+      print("Hi");
+      int l = 1;
       for (Character key : vars.keySet()) {
         int j = vars.get(key).split(",").length;
         if (j > l) {
