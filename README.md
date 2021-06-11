@@ -16,14 +16,14 @@ y must precede all other elements of functions in which y is a function of x, an
 Ellipses and circles must be entered in standard form to be graphed. For ellipses, this is\
 (x-h)^2/a+(y-k)^2/b=1\
 and for circles\
-(x-h)^2+(y-k)^2=r^2
+(x-h)^2+(y-k)^2=r^2\
 Here are some examples of valid equation types and forms.\
 Constant: y=1 x=-1\
 Linear: y=2x+1\
 Quadratic: y=1/2x^2+2x-3\
 Cubic: x=y^3\
 Circle: (x-1)^2+(y+4)^2=9\
-Ellipse: x^2/4+(y+3)^2/16=1\
+Ellipse: x^2/4+(y+3)^2/16=1
 
 ### Development Log
 **5/25/2021**\
