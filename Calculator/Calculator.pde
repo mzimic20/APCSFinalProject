@@ -2,7 +2,7 @@ Grid n = new Grid();
 ArrayList<TextBox> boxes;
 float[] center = null;
 HashMap<Character, String> vars = new HashMap<Character, String>();
-TextBox next = null;
+boolean released = true;
 
 void setup() {
   size(1200, 900);
@@ -43,7 +43,7 @@ void keyPressed() {
   TextBox target = null;
   for (TextBox b : boxes) {
     if (b.getStatus()) {
-      if (key == TAB || key == ENTER || key == ' ') {next=b;} 
+      if (key == TAB || key == ENTER || key == ' ') {if (released) {b.clicked = false; boxes.get((b.rank+1)%10).clicked = true; released = false;}} 
       else if (key == BACKSPACE) b.remove();
       else if (key != CODED) {
         b.add(key);
@@ -57,11 +57,7 @@ void keyPressed() {
 }
 
 void keyReleased() {
-  if (next != null) {
-    next.clicked = false;
-    boxes.get((next.rank+1) % 10).clicked = true;
-    next = null;
-  }
+  released = true;
 }
 
 void keyClicked(){}
