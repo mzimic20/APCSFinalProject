@@ -4,9 +4,6 @@ class TextBox {
   private String e;
   int rank;
   boolean clicked, error;
-  private Function f;
-  private Conic c;
-  private Point p;
   private Object o;
 
   TextBox(int r) {
@@ -14,9 +11,6 @@ class TextBox {
     rank = r;
     clicked = false;
     error = false;
-    if (e.length() > 0 && e.charAt(0) == '(' && e.charAt(e.length() - 1) == ')' && e.contains(",")) p = new Point(e);
-    else if (e.contains("x") && e.contains("y") && (e.indexOf("x") < e.indexOf("=") && e.indexOf("y") < e.indexOf("=")) && e.length() > e.indexOf("=") + 1) c = new Conic(e);
-    else f = new Function(e);
   }
 
   void draw() {
@@ -41,25 +35,27 @@ class TextBox {
     stroke(genColor());
     fill(genColor());
     if (!e.isEmpty()) circle(280, rank * 90 + 45, 5);
-    
+
     //graph
-    if (p != null) p.draw(n);
-    else if (c != null) c.draw(n);
-    else f.draw(n);
-    stroke(191);
-  
-    //graph
-    if (o instanceof ArrayList<?> && ((ArrayList) o).size() > 0 && ((ArrayList) o).get(0) instanceof Function) {
+    if (o instanceof ArrayList<?> && ((ArrayList) o).size() > 0) {
       for (int i = 0; i < ((ArrayList) o).size(); i++) {
-        ((Function)((ArrayList) o).get(i)).draw(n);
+        if (((ArrayList) o).get(0) instanceof Function) {
+          ((Function)((ArrayList) o).get(i)).draw(n);
+        }
+        if (((ArrayList) o).get(0) instanceof Conic) {
+          ((Conic)((ArrayList) o).get(i)).draw(n);
+        }
+        if (((ArrayList) o).get(0) instanceof Point) {
+          ((Point)((ArrayList) o).get(i)).draw(n);
+        }
+      }
+      if (o instanceof Slider) {
+        //((Slider) o).
       }
     }
-    if (o instanceof Slider) {
-      //((Slider) o).
-    }
-
+    stroke(191);
   }
-  
+
   color genColor() {
     color out = #888888;
     if (rank == 1) out = #dd6666;
@@ -81,13 +77,6 @@ class TextBox {
   //modifies the text by concatenating to the string
   void add(char c) {
     e += c;
-    //tests for whether or not parentheses are balanced, if not, it does not graph
-    if (f.pbounds(e, e.length() - 1)) {
-      error = false;
-      this.updateF();
-      this.updateC();
-      this.updateP();
-    }
     this.updateO();
     if (o instanceof ArrayList<?> && ((ArrayList) o).size() > 0 && ((ArrayList) o).get(0) instanceof Function) {
       for (int i = 0; i < ((ArrayList) o).size(); i++) {
@@ -98,22 +87,13 @@ class TextBox {
           this.updateO();
         } else error = true;
       }
-
-    }
+    } else this.updateO();
   }
 
   //modifies the text by removing from the string
   void remove() {
-    if (!e.isEmpty()) e = e.substring(0, e.length() - 1);
-    this.updateF();
-    //tests for whether or not parentheses are balanced, if not, it does not graph
-    if (f.pbounds(e, e.length() - 1)) {
-      error = false;
-      this.updateF();
-      this.updateC();
-      this.updateP();
+    if (e.length() == 1) {e = ""; o = null;} else if (!e.isEmpty()) { e = e.substring(0, e.length() - 1);
     }
-    this.updateO();
     if (o instanceof ArrayList<?> && ((ArrayList) o).size() > 0 && ((ArrayList) o).get(0) instanceof Function) {
       for (int i = 0; i < ((ArrayList) o).size(); i++) {
         Function f = (Function)((ArrayList) o).get(i);
@@ -123,6 +103,8 @@ class TextBox {
           this.updateO();
         } else error = true;
       }
+    } else {
+      this.updateO();
     }
   }
 
@@ -132,64 +114,54 @@ class TextBox {
       clicked = true;
     } else clicked = false;
   }
-  
-  void updateF() {
-    f = new Function(e);
-  }
-  
-  void updateC() {
-    if (e.contains("x") && e.contains("y") && (e.indexOf("x") < e.indexOf("=") && e.indexOf("y") < e.indexOf("=")) && e.length() > e.indexOf("=") + 1) c = new Conic(e);
-  }
-  
-  void updateP() {
-    if (e.length() > 0 && e.charAt(0) == '(' && e.charAt(e.length() - 1) == ')' && e.contains(",")) p = new Point(e);
-    else p = null;
-  }
-  
-  Point getP() {
-    return p;
-  }
 
   void updateO() {
     //replaces variables in equation with correct value
-    if (e.contains("x") || e.contains("y")) {
+    if (e.contains("x") || e.contains("y") || (e.contains("(") && e.contains(")"))) {
       //determines max length of all lists
-    int l = 0;
-    for (Character key : vars.keySet()) {
-      int j = vars.get(key).split(",").length;
-      if (j > l) {
-        l = j;
+      int l = 0;
+      for (Character key : vars.keySet()) {
+        int j = vars.get(key).split(",").length;
+        if (j > l) {
+          l = j;
+        }
       }
-    }
-      if (e.contains("x^2") && e.contains("y^2")) {
-        //o = new ArrayList<Conic>();
-      } else {
+      if ((e.length() > 2 && (e.substring(0,2).equals("y=") || e.substring(0,2).equals("x="))) || (!e.contains("=") && !e.contains("(") && !e.contains(")"))) {
         o = new ArrayList<Function>();
+      } else if (e.contains("x") && e.contains("y") && (e.indexOf("x") < e.indexOf("=") && e.indexOf("y") < e.indexOf("=")) && e.length() > e.indexOf("=") + 1) {
+        o = new ArrayList<Conic>();
+      } else if (e.contains("(") && e.contains(")")) {
+        o = new ArrayList<Point>();
       }
       if (l != 0) {
-      for (int i = 0; i < l; i++) {
-        String edited = e;
-        for (Character key : vars.keySet()) {
-          String[] r = vars.get(key).split(",");
-          if (r.length-1 < i) {
-            continue;
-          } else {
-            edited = edited.replace(""+key, r[i]);
+        for (int i = 0; i < l; i++) {
+          String edited = e;
+          for (Character key : vars.keySet()) {
+            String[] r = vars.get(key).split(",");
+            if (r.length-1 < i) {
+              continue;
+            } else {
+              edited = edited.replace(""+key, r[i]);
+            }
+          }
+          //replaces variables with their proper values
+          if ((e.length() > 2 && (e.substring(0,2).equals("y=") || e.substring(0,2).equals("x="))) || (!e.contains("=") && !e.contains("(") && !e.contains(")"))) {
+            ((ArrayList<Function>) o).add(new Function(edited));
+          } else if (e.contains("x") && e.contains("y") && (e.indexOf("x") < e.indexOf("=") && e.indexOf("y") < e.indexOf("=")) && e.length() > e.indexOf("=") + 1) {
+            ((ArrayList<Conic>) o).add(new Conic(edited));
+          } else if (e.contains("(") && e.contains(")")) {
+            ((ArrayList<Point>) o).add(new Point(edited));
           }
         }
-        //replaces variables with their proper values
-        if (e.contains("x^2") && e.contains("y^2")) {
-          //((ArrayList<Conic>) o).add(new Conic(edited));
-        } else {
-          ((ArrayList<Function>) o).add(new Function(edited));
+      } else {
+        if ((e.length() > 2 && (e.substring(0,2).equals("y=") || e.substring(0,2).equals("x="))) || (!e.contains("=") && !e.contains("(") && !e.contains(")"))) {
+
+          ((ArrayList<Function>) o).add(new Function(e));
+        } else if (e.contains("x") && e.contains("y") && (e.indexOf("x") < e.indexOf("=") && e.indexOf("y") < e.indexOf("=")) && e.length() > e.indexOf("=") + 1) {
+          ((ArrayList<Conic>) o).add(new Conic(e));
+        } else if (e.contains("(") && e.contains(")")) {
+          ((ArrayList<Point>) o).add(new Point(e));
         }
-      }}
-       else {
-        if (e.contains("x^2") && e.contains("y^2")) {
-            //((ArrayList<Conic>) o).add(new Conic(e));
-          } else {
-            ((ArrayList<Function>) o).add(new Function(e));
-          }
       }
     } else if (e.length() >= 2 && e.contains("=")) {
       if (e.contains(",") || e.contains("[") || e.contains("]")) {

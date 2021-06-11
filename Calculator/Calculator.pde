@@ -44,7 +44,9 @@ void keyPressed() {
   for (TextBox b : boxes) {
     if (b.getStatus()) {
       if (key == TAB || key == ENTER || key == ' ') {if (released) {b.clicked = false; boxes.get((b.rank+1)%10).clicked = true; released = false;}} 
-      else if (key == BACKSPACE) b.remove();
+      else if (key == BACKSPACE) {
+        b.remove();
+      }
       else if (key != CODED) {
         b.add(key);
       }
