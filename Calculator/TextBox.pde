@@ -133,6 +133,10 @@ class TextBox {
     } else clicked = false;
   }
   
+  void updateF() {
+    f = new Function(e);
+  }
+  
   void updateC() {
     if (e.contains("x") && e.contains("y") && (e.indexOf("x") < e.indexOf("=") && e.indexOf("y") < e.indexOf("=")) && e.length() > e.indexOf("=") + 1) c = new Conic(e);
   }
