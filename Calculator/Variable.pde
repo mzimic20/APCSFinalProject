@@ -4,7 +4,7 @@ interface Variable {
 
 class Slider implements Variable {
   Character name;
-  String value = "";
+  float n = 0;
   float lbound = -10;
   float rbound = 10;
   public Slider(Character n) {
@@ -19,16 +19,23 @@ class Slider implements Variable {
           l = j;
         }
       }
-      vars.put(name, e+String.format("%0"+(l-1) + "d", 0).replace("0", "," + e));
+      if (l > 0) vars.put(name, e+new String(new char[l-1]).replace("\0",","+e));
     } else {
       vars.remove(name);
     }
+    if (e.equals("")) {n = 0;} else {n = Float.parseFloat(e);}
+    if (n < lbound) {
+      lbound = n;
+    }
+    if (n > rbound) {
+      rbound = n;
+    }
   }
+  
 }
 
 class List implements Variable {
   Character name;
-  String value = "";
   public List(Character n) {
     name = n;
   }
