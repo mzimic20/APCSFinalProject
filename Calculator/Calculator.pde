@@ -60,9 +60,6 @@ void keyReleased() {
   released = true;
 }
 
-void keyClicked(){}
-
-
 void mouseClicked() {
   for (TextBox b : boxes) {
     b.changeStatus();
