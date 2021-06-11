@@ -38,7 +38,7 @@ class TextBox {
     //color
     stroke(genColor());
     fill(genColor());
-    circle(280, rank * 90 + 45, 5);
+    if (!e.isEmpty()) circle(280, rank * 90 + 45, 5);
     
     //graph
     if (p != null) p.draw(n);
