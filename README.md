@@ -54,10 +54,13 @@ Marko: Worked on revising the algorithms and pseudocode developed for the new ev
 Christopher: I was working on writing sudocode for the variables class, and its implementation into the TextBox classes.
 
 **6/8/2021**\
-Christopher: Worked a bit on differentiating input (as in separating variables from functions and nonfunctions and making different code that deals with different inputs).
+Christopher: Worked a bit on differentiating input (as in separating variables from functions and nonfunctions and making different code that deals with different inputs).\
+Marko: Ditched new evaluate() method because it wouldn't work, created Conic class to graph circles and ellipses.
 
 **6/9/2021**\
-Christopher: Continued to work on differentiating input as well as working on creating the variables class, then implementing it into the TextBox. I also worked on learning how Maps work and trying to use them as a variable storage container, rewriting much of the logic that doesn't accept variables.
+Christopher: Continued to work on differentiating input as well as working on creating the variables class, then implementing it into the TextBox. I also worked on learning how Maps work and trying to use them as a variable storage container, rewriting much of the logic that doesn't accept variables.\
+Marko: Began writing Conic and fixing issues with it.
 
 **6/10/2021**\
-Christopher: I got the variables to start working, uniting the code with Marko's should not be too difficult. I will probably start work on an instruction manuel to make sure that the user doesn't break any code.
+Christopher: I got the variables to start working, uniting the code with Marko's should not be too difficult. I will probably start work on an instruction manual to make sure that the user doesn't break any code.\
+Marko: Finished writing Conic, created and finished Point class, gave each TextBox and corresponding line a unique color.
