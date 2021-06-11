@@ -5,7 +5,7 @@ https://docs.google.com/document/d/1e4tCY54Hs_qL2n1JYY5i5HQ0xJ0pONw4oTB4kWREFcU/
 Group Name: CalcuLosers\
 Group Member Names: Marko Zimic and Christopher Tan
 
-### Summary
+## Summary
 Our project is a graphing calculator. It will be very similar to applications like Desmos, taking in equation parameters in a field with textboxes and displaying the graphs for the equations on a separate grid field adjacent to the textboxes. The textbox fields will also function as simple calculators, taking basic arithmetic equations and outputting their results nearby. The program will be able to take and graph multiple equations at once and will be able to take all different sorts of equations, from simple constant and linear equations to polynomials, and - eventually, hopefully - parametric equations and conic sections.
 
 ## Instructions
@@ -25,9 +25,11 @@ Cubic: x=y^3\
 Circle: (x-1)^2+(y+4)^2=9\
 Ellipse: x^2/4+(y+3)^2/16=1\
 Point: (1, -2)\
-Our calculator also supports list creation and usage. To make a list, start with any variable other than x or y, use =, and add brackets. Separate values with a comma.
+Our calculator also supports list creation and usage. To make a list, start with any single-letter variable other than x or y, use =, and add brackets. Separate values with a comma. The calculator immitates Desmos's behaviour: if two lists have unequal sizes, substitution will truncate after the end of the shorter of the two lists, as a result, variables are not equivalent to lists with length one, variables will be substituted in all cases.\
+a = [2,4]; b = [1]; y=ax+b will plot one line with a = 2, b = 1.\
+a = [2,4]; b = 1; y=ax+b will plot two lines with a = 2, b = 1; and a = 4, b = 1.
 
-### Development Log
+## Development Log
 **5/25/2021**\
 Christopher: I created and worked on the UML diagram and outlined the basic classes (including functions, and instance variables). I also created a few classes and filled in the basic structure and layout.\
 Marko: I began working on the Grid class, adding basic lines and a zooming feature as well as an empty region on the left where the textboxes will go, where the equations will be entered.
