@@ -10,7 +10,7 @@ Our project is a graphing calculator. It will be very similar to applications li
 
 ## Instructions
 To start the program, open the Processing document and click the start button.\
-To enter equations, click on a textbox. When it is highlighted blue, you may enter an equation by typing it into the box. You may deselect a selected textbox by clicking elsewhere. If a deselected textbox is red, that means there is a parenthetical imbalance error. If there is content in a textbox, a little colored dot will appear on the box's left. The line that corresponds to the entered equation will have the same color as the dot.\
+To enter equations, click on a textbox. When it is highlighted blue, you may enter an equation by typing it into the box. You may deselect a selected textbox by clicking elsewhere. If a deselected textbox is red, that means there is a parenthetical imbalance error. If there is content in a textbox, a little colored dot will appear on the box's right. The line that corresponds to the entered equation will have the same color as the dot.\
 You can change the grid's field of view by dragging while the mouse is pressed or zooming in and out with the scroll wheel.\
 y must precede all other elements of functions in which y is a function of x, and vice versa.\
 Ellipses and circles must be entered in standard form to be graphed. For ellipses, this is\
